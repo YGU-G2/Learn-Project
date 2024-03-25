@@ -1,0 +1,258 @@
+{
+  "home": "Home",
+  "colleges": "Colleges",
+  "news": "News",
+  "activites": "Activites",
+  "about": "About",
+  "aboutUniversity": "About The University",
+  "universityFullName": "Yemen and Gulf University of Science and Technology",
+  "register": "Register Now",
+  "knowMore": "Know More",
+  "latestUniversityNews": "Latest University News",
+  "factsInterestYou": "Facts That May Interest You",
+  "yearsOfGiving": "Years Of Giving",
+  "facultyMembers": "Faculty Members",
+  "programs": "Programs",
+  "universityActivites": "University Activites",
+  "stayInTouch": "Stay In Touch",
+  "allRightsReserved": "All Rights Reserved",
+  "myName": "The Legend / Ebrahim Alharby",
+  "all": "All {all}",
+  "@all": {
+    "placeholders": {
+      "all": {
+        "content": "{all}",
+        "example": "colleges"
+      }
+    }
+  },
+  "images": "{images} Images",
+  "@images": {
+    "placeholders": {
+      "images": {
+        "content": "{images}",
+        "example": "college"
+      }
+    }
+  },
+  "singleNew": "New",
+  "activity": "Activity",
+  "college": "College",
+  "university": "University",
+  "universityName": "University Name ({universityName})",
+  "@universityName": {
+    "placeholders": {
+      "universityName": {
+        "content": "{universityName}",
+        "example": "Arabic"
+      }
+    }
+  },
+  "arabic": "Arabic",
+  "english": "English",
+  "enter": "Enter {enter}",
+  "@enter": {
+    "placeholders": {
+      "enter": {
+        "content": "{enter}",
+        "example": "universityName"
+      }
+    }
+  },
+  "universityLogo": "University Logo",
+  "presidentSpeech": "Speech Of The University President",
+  "save": "Save",
+  "addNew": "Add New",
+  "ofPage": "Of {ofPage} Pages",
+  "@ofPage": {
+    "placeholders": {
+      "ofPage": {
+        "content": "{ofPage}",
+        "example": "10"
+      }
+    }
+  },
+  "rowsSelected": "{rowsSelected} Rows Selected",
+  "@rowsSelected": {
+    "placeholders": {
+      "rowsSelected": {
+        "content": "{rowsSelected}",
+        "example": "10"
+      }
+    }
+  },
+  "lectuers": "Lectuers",
+  "allLectuers": "All Lectuers",
+  "lectuersPresented": "Lectuers Presented",
+  "lectuersNotPresented": "Lectuers Not Presented",
+  "supLectuersPresented": "Presented",
+  "supLectuersNotPresented": "Not Presented",
+  "today": "Today",
+  "thisWeek": "This Week",
+  "months": "Months",
+  "days": "Days",
+  "hours": "Hours",
+  "minutes": "Minutes",
+  "seconds": "Seconds",
+  "presence": "Presence",
+  "settings": "Settings",
+  "themes": "Themes",
+  "themesDescription": "Light Mode, Dark Mode, Colors",
+  "language": "Language",
+  "languageDescription": "Arabic, English",
+  "englishLanguage": "English",
+  "arabicLanguage": "العربية",
+  "themesMode": "Themes Mode",
+  "dark": "Dark",
+  "light": "Light",
+  "defaultSystem": "System (Default)",
+  "choseYourMode": "Chose Your Mode",
+  "ok": "Ok",
+  "cancel": "Cancel",
+  "colors": "Colors",
+  "allColors": "Blue, Red, Yellow, Purple, Green",
+  "blue": "Blue",
+  "red": "Red",
+  "yellow": "Yellow",
+  "purple": "Purple",
+  "green": "Green",
+  "choseYourFavoriteColor": "Chose Your Favorite Color",
+  "choseYourLanguage": "Chose Your Language",
+  "systemLanguage": "System Language",
+  "dashboard": "Dashboard",
+  "login": "Login",
+  "chat": "Chat",
+  "academicNumber": "Academic Number",
+  "password": "Password",
+  "forgotThePassword": "Forgot The Password ?",
+  "the": "The {the}",
+  "@the": {
+    "placeholders": {
+      "the": {
+        "content": "{the}",
+        "example": "word"
+      }
+    }
+  },
+  "progressInLectures": "Progress In Lectures",
+  "subjects": "Subjects",
+  "subjectName": "Subject Name",
+  "subjectTeacher": "Subject Teacher",
+  "subjectGrades": "Subject Grades",
+  "bestStudents": "Best Students",
+  "mediaLinksDocuments": "Media, Links and Documents",
+  "media": "Media",
+  "links": "Links",
+  "documents": "Documents",
+  "academicAffairs": "Academic Affairs",
+  "educationStaff": "Education Staff",
+  "oneEducationStaff": "Education Staff",
+  "add": "Add {add}",
+  "@add": {
+    "placeholders": {
+      "add": {
+        "content": "{add}",
+        "example": "word"
+      }
+    }
+  },
+  "editWord": "Edit {editWord}",
+  "@editWord": {
+    "placeholders": {
+      "editWord": {
+        "content": "{editWord}",
+        "example": "word"
+      }
+    }
+  },
+  "name": "Name",
+  "academicDegree": "Academic Degree",
+  "professor": "Professor",
+  "doctorate": "Doctorate",
+  "bachelor": "Bachelor",
+  "choose": "Choose {choose}",
+  "@choose": {
+    "placeholders": {
+      "choose": {
+        "content": "{choose}",
+        "example": "universityName"
+      }
+    }
+  },
+  "gender": "Gender",
+  "male": "Male",
+  "female": "Female",
+  "birthDate": "BirthDate",
+  "edit": "edit",
+  "delete": "Delete",
+  "requiredField": "This Field Is required",
+  "onlyNumbers": "This Field Must Contain Numbers Only",
+  "minLength": "This Field Must Contain at Least {minLength} characters",
+  "@minLength": {
+    "placeholders": {
+      "minLength": {
+        "content": "{minLength}",
+        "example": "3"
+      }
+    }
+  },
+  "emptying": "Emptying",
+  "noData": "No Data Has Been Added Yet",
+  "deleteSure": "Do You Really Want to Delete \"{deleteSure}\"",
+  "@deleteSure": {
+    "placeholders": {
+      "deleteSure": {
+        "content": "{deleteSure}",
+        "example": "3"
+      }
+    }
+  },
+  "yes": "Yes",
+  "no": "No",
+  "verificationMessage": "Verification Message",
+  "deleteAll": "Delete All",
+  "ofRows": "Of Rows",
+  "sortBy": "Sort By",
+  "enable": "Enable {enable}",
+  "@enable": {
+    "placeholders": {
+      "enable": {
+        "content": "{enable}",
+        "example": "3"
+      }
+    }
+  },
+  "disable": "Disable {disable}",
+  "@disable": {
+    "placeholders": {
+      "disable": {
+        "content": "{disable}",
+        "example": "3"
+      }
+    }
+  },
+  "rowsSelection": "Rows Selection",
+  "show": "Show {show}",
+  "@show": {
+    "placeholders": {
+      "show": {
+        "content": "{show}",
+        "example": "3"
+      }
+    }
+  },
+  "hide": "Hide {hide}",
+  "@hide": {
+    "placeholders": {
+      "hide": {
+        "content": "{hide}",
+        "example": "3"
+      }
+    }
+  },
+  "numberingColumn": "Numbering Column",
+  "search": "Search",
+  "pagination": "Pagination",
+  "searchField": "Search...",
+  "exams": "Exams"
+}

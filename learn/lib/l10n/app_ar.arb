@@ -1,0 +1,258 @@
+{
+  "home": "الرئيسية",
+  "colleges": "الكليات",
+  "news": "الأخبار",
+  "activites": "الأنشطة",
+  "about": "عن الحامعة",
+  "aboutUniversity": " نبذة عن الجامعة",
+  "universityFullName": "جـامــعــة الـيـمـن والـخـلـيـج للــعــلـــوم والتكـنـــولـوجيـــا",
+  "register": "سجل الأن",
+  "knowMore": "معرفة المزيد",
+  "latestUniversityNews": "آخر أخبار الجامعة",
+  "factsInterestYou": "حقائق قد تهمك",
+  "yearsOfGiving": "أعوام من العطاء",
+  "facultyMembers": "عضو هئية التدريس",
+  "programs": "البرامج",
+  "universityActivites": "أنشطة الجامعة",
+  "stayInTouch": "ابق على تواصل",
+  "allRightsReserved": "كافة الحقوق محفوظة",
+  "myName": "الأسطورة / إبراهيم الحربي",
+  "all": "كل {all}",
+  "@all": {
+    "placeholders": {
+      "all": {
+        "content": "{all}",
+        "example": "الكليات"
+      }
+    }
+  },
+  "images": "صور {images}",
+  "@images": {
+    "placeholders": {
+      "images": {
+        "content": "{images}",
+        "example": "الكلية"
+      }
+    }
+  },
+  "singleNew": "الخبر",
+  "activity": "النشاط",
+  "college": "الكلية",
+  "university": "الجامعة",
+  "universityName": "اسم الجامعة ({universityName})",
+  "@universityName": {
+    "placeholders": {
+      "universityName": {
+        "content": "{universityName}",
+        "example": "Arabic"
+      }
+    }
+  },
+  "arabic": "عربي",
+  "english": "إنجليزي",
+  "enter": "ادخل {enter}",
+  "@enter": {
+    "placeholders": {
+      "enter": {
+        "content": "{enter}",
+        "example": "universityName"
+      }
+    }
+  },
+  "universityLogo": "شعار الحامعة",
+  "presidentSpeech": "كلمة رئيس الجامعة",
+  "save": "حفظ",
+  "addNew": "إضافة جديد",
+  "ofPage": "من {ofPage} صفحات",
+  "@ofPage": {
+    "placeholders": {
+      "ofPage": {
+        "content": "{ofPage}",
+        "example": "10"
+      }
+    }
+  },
+  "rowsSelected": "تم تحديد {rowsSelected} من الصفوف",
+  "@rowsSelected": {
+    "placeholders": {
+      "rowsSelected": {
+        "content": "{rowsSelected}",
+        "example": "10"
+      }
+    }
+  },
+  "lectuers": "المحاضرات",
+  "allLectuers": "كل المحاضرات",
+  "lectuersPresented": "محاضرات تم حضورها",
+  "lectuersNotPresented": "محاضرات لم يتم حضورها",
+  "supLectuersPresented": "تم حضورها",
+  "supLectuersNotPresented": "لم يتم حضورها",
+  "today": "اليوم",
+  "thisWeek": "هذا الأسبوع",
+  "months": "شـــهـــر",
+  "days": "ايــــام",
+  "hours": "ساعات",
+  "minutes": "دقـــائــق",
+  "seconds": "ثــــوانــــي",
+  "presence": "حضور",
+  "settings": "الاعدادات",
+  "themes": "السمات",
+  "themesDescription": "المظهر الفاتح, المظهر الداكن, الالوان",
+  "language": "اللغة",
+  "languageDescription": "العربية, الإنجليزية",
+  "englishLanguage": "English",
+  "arabicLanguage": "العربية",
+  "themesMode": "المظهر",
+  "dark": "داكن",
+  "light": "فاتح",
+  "defaultSystem": "تلقائي (النظام)",
+  "choseYourMode": "اختر المظهر الخاص بك",
+  "ok": "موافق",
+  "cancel": "إلغاء",
+  "colors": "الالوان",
+  "allColors": "ازرق، احمر، اصفر، بنفسجي، اخضر",
+  "blue": "ازرق",
+  "red": "احمر",
+  "yellow": "اصفر",
+  "purple": "بنفسجي",
+  "green": "اخضر",
+  "choseYourFavoriteColor": "اختر لونك المفضل",
+  "choseYourLanguage": "اختر لغتك",
+  "systemLanguage": "لغة النظام",
+  "dashboard": "لوحة التحكم",
+  "login": "تسجيل الدخول",
+  "chat": "الدردشات",
+  "academicNumber": "الرقم الأكاديمي",
+  "password": "كلمة السر",
+  "forgotThePassword": "نسيت كلمة السر ؟",
+  "the": "{the}",
+  "@the": {
+    "placeholders": {
+      "the": {
+        "content": "{the}",
+        "example": "word"
+      }
+    }
+  },
+  "progressInLectures": "التقدم في المحاضرات",
+  "subjects": "المواد الدراسية",
+  "subjectName": "اسم المادة",
+  "subjectTeacher": "مدرس المادة",
+  "subjectGrades": "درجات المادة",
+  "bestStudents": "افضل الطلاب",
+  "mediaLinksDocuments": "وسائط وروابط ومستندات",
+  "media": "وسائط",
+  "links": "روابط",
+  "documents": "مستندات",
+  "academicAffairs": "الشؤون الأكاديمية",
+  "educationStaff": "الكادر التعليمي",
+  "oneEducationStaff": "كادر تعليمي",
+  "add": "إضافة {add}",
+  "@add": {
+    "placeholders": {
+      "add": {
+        "content": "{add}",
+        "example": "word"
+      }
+    }
+  },
+  "editWord": "تعديل {editWord}",
+  "@editWord": {
+    "placeholders": {
+      "editWord": {
+        "content": "{editWord}",
+        "example": "word"
+      }
+    }
+  },
+  "name": "الاسم",
+  "academicDegree": "الدرجة العلمية",
+  "professor": "بروفيسور",
+  "doctorate": "دكتوراه",
+  "bachelor": "بكالوريوس",
+  "choose": "اختر {choose}",
+  "@choose": {
+    "placeholders": {
+      "choose": {
+        "content": "{choose}",
+        "example": "universityName"
+      }
+    }
+  },
+  "gender": "الجنس",
+  "male": "ذكر",
+  "female": "أنثى",
+  "birthDate": "تاريخ الميلاد",
+  "edit": "تعديل",
+  "delete": "حذف",
+  "requiredField": "هذا الحقل مطلوب",
+  "onlyNumbers": "يجب ان يحتوي هذا الحقل على ارقام فقط",
+  "minLength": "يجب ان يحتوي هذا الحقل على {minLength} محارف على الأقل",
+  "@minLength": {
+    "placeholders": {
+      "minLength": {
+        "content": "{minLength}",
+        "example": "3"
+      }
+    }
+  },
+  "emptying": "تفريغ",
+  "noData": "لم يتم إضافة بيانات الى الان",
+  "deleteSure": "هل تريد حذف \"{deleteSure}\" فعلاً",
+  "@deleteSure": {
+    "placeholders": {
+      "deleteSure": {
+        "content": "{deleteSure}",
+        "example": "3"
+      }
+    }
+  },
+  "yes": "نعم",
+  "no": "لا",
+  "verificationMessage": "رسالة تأكيد",
+  "deleteAll": "حذف الكل",
+  "ofRows": "من الصفوف",
+  "sortBy": "فرز حسب",
+  "enable": "تمكين {enable}",
+  "@enable": {
+    "placeholders": {
+      "enable": {
+        "content": "{enable}",
+        "example": "3"
+      }
+    }
+  },
+  "disable": "تعطيل {disable}",
+  "@disable": {
+    "placeholders": {
+      "disable": {
+        "content": "{disable}",
+        "example": "3"
+      }
+    }
+  },
+  "rowsSelection": "تحديد الصفوف",
+  "show": "إضهار {show}",
+  "@show": {
+    "placeholders": {
+      "show": {
+        "content": "{show}",
+        "example": "3"
+      }
+    }
+  },
+  "hide": "إخفاء {hide}",
+  "@hide": {
+    "placeholders": {
+      "hide": {
+        "content": "{hide}",
+        "example": "3"
+      }
+    }
+  },
+  "numberingColumn": "عمود الترقيم",
+  "search": "البحث",
+  "pagination": "تقسيم الصفحات",
+  "searchField": "بحث...",
+  "exams": "الأختبارات"
+}
