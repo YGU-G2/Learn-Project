@@ -1,0 +1,161 @@
+============size====================
+
+Get.width * 0.0125 == 5
+Get.width * 0.025 == 10
+Get.width * 0.027 == 11
+Get.width * 0.03 == 12
+Get.width * 0.032 == 13
+Get.width * 0.035 == 14
+Get.width * 0.037 == 15
+Get.width * 0.040 == 16 
+Get.width * 0.045 == 18
+Get.width * 0.05 == 20
+Get.width * 0.062 == 25
+Get.width * 0.073 == 30
+Get.width * 0.0975 == 40
+Get.width * 0.122 == 50
+Get.width * 0.146 == 60
+Get.width * 0.195 == 80
+Get.width * 0.220 == 90
+Get.width * 0.245 == 100
+Get.width * 0.250 == 102
+Get.width * 0.487 == 200
+
+===============Icons===============
+
+- AntDesign
+- Bootstrap
+- BoxIcons
+- Brands Logo
+- Clarity
+- EvaIcons
+- Flags Logo
+- FontAwesome
+- HeroIcons
+- Iconsax
+- IonIcons
+- LineAwesome
+- MingCute
+- OctIcons
+- PixelArtIcons
+- TeenyIcons
+- ZondIcons
+
+
+======================== animate_do ===============================
+=============================================================================
+Property	        Type	    Description
+=============================================================================
+key	                Key	        (optional) Widget key
+child	            Widget	    Child Widget to animate
+duration	        Duration	Animation duration
+delay	            Duration	Delay before the animation
+from	            double	    Initial or final destination, if you want a slide or fade more striking
+animate	            boolean	    Change this property from false to true to start the animation (useful if you use setState, Bloc, Provider, Redux or any other state management system)
+infinite	        boolean	    Attention seekers can be run infinitely with this property
+spins	            double	    The number of spins that you want (some animations have this, ex: Spin, Roulette, PerfectSpin )
+manualTrigger	    boolean	    if you're going to trigger the animation manually (required the controller property)
+controller	        Function	Function that exposes the controller (advanced use cases the majority don't need this)
+onFinish	        Function	Function that is called when the animation finished (With argument: forward or backward )
+curve	            Curve	    You can change the curve animation of any Animated widget in order to customize it
+==============================================================================
+
+-----------FadeIn Animations------------- 
+FadeIn
+FadeInDown
+FadeInDownBig
+FadeInUp
+FadeInUpBig
+FadeInLeft
+FadeInLeftBig
+FadeInRight
+FadeInRightBig
+
+-----------FadeOut Animations---------------- 
+FadeOut
+FadeOutDown
+FadeOutDownBig
+FadeOutUp
+FadeOutUpBig
+FadeOutLeft
+FadeOutLeftBig
+FadeOutRight
+FadeOutRightBig
+
+----------------BounceIn Animations-------------- 
+BounceInDown
+BounceInUp
+BounceInLeft
+BounceInRight
+
+----------------ElasticIn Animations------------------ 
+ElasticIn
+ElasticInDown
+ElasticInUp
+ElasticInLeft
+ElasticInRight
+
+--------------SlideIns Animations--------------- 
+SlideInDown
+SlideInUp
+SlideInLeft
+SlideInRight
+
+---------------FlipIn Animations----------------- 
+FlipInX
+FlipInY
+
+---------Zooms---------- 
+ZoomIn
+ZoomOut
+
+------------------SpecialIn Animations---------------- 
+JelloIn
+
+--------------------Attention Seeker-------------------- 
+Bounce
+Dance
+Flash
+Pulse
+Roulette
+ShakeX
+ShakeY
+Spin
+SpinPerfect
+Swing
+
+
+==========================================
+-----------------Loading------------------
+==========================================
+
+1- RotatingPlain
+2- DoubleBounce
+3- Wave
+4- WanderingCubes
+5- FadingFour
+6- FadingCube
+7- Pulse
+8- ChasingDots
+9- ThreeBounce
+10- Circle
+11- CubeGrid
+12- FadingCircle
+13- RotatingCircle
+14- FoldingCube
+15- PumpingHeart
+16- HourGlass
+17- PouringHourGlass
+18- PouringHourGlassRefined
+19- FadingGrid
+20- Ring
+21- Ripple
+22- SpinningCircle
+23- SpinningLines
+24- SquareCircle
+25- DualRing
+26- PianoWave
+27- DancingSquare
+28- ThreeInOut
+29- WaveSpinner
+30- PulsingGrid

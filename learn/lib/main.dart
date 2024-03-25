@@ -1,125 +1,218 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:get/get.dart';
+import 'package:learn/controller/language_controller.dart';
+import 'package:learn/controller/main_controller.dart';
+import 'package:learn/controller/table_controller.dart';
+import 'package:learn/controller/theme_controller.dart';
+import 'package:learn/screens/dashboard/academic_affairs/academic_affairs.dart';
+import 'package:learn/screens/dashboard/main_dashboard_screen.dart';
+import 'package:learn/screens/dashboard/university/university_settings.dart';
+import 'package:learn/screens/exams/main_exams_screen.dart';
+import 'package:learn/screens/home/actitvites_main_page_datiles.dart';
+import 'package:learn/screens/home/collage_main_page_datiles.dart';
+import 'package:learn/screens/home/home.dart';
+import 'package:learn/screens/home/news_main_page_datiles.dart';
+import 'package:learn/screens/lectuers/main_lectuers.dart';
+import 'package:learn/screens/login.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:learn/screens/settings/main_settings.dart';
+import 'package:learn/screens/settings/themes_main_settings.dart';
+import 'package:learn/screens/subjects/main_subjects_screen.dart';
+import 'package:learn/screens/subjects/subjects_info.dart';
+import 'package:learn/screens/subjects/subjects_media_links_docs.dart';
+import 'package:learn/themes/themes.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
 
-void main() {
-  runApp(const MyApp());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  int selectedColor = await ThemeController.getSelectedColor();
+  int modeIndex = await ThemeController.getThemeModeIndex();
+  ThemeController.colorNum = selectedColor;
+  ThemeController.themeModeIndex = modeIndex;
+
+  String selectedLanguage = await LanguageController.getLanguage();
+  LanguageController.currentLanguage = selectedLanguage;
+  LanguageController.lang = selectedLanguage == "ar" ? true : false;
+  Locale currentLanguage = await LanguageController.getCurrentLocale();
+
+  if (selectedLanguage == 'system') {
+    selectedLanguage = Get.deviceLocale!.languageCode;
+  }
+
+  Get.updateLocale(Locale(selectedLanguage));
+  Get.changeTheme(
+    Themes.getTheme(
+      selectedColor,
+      modeIndex == 0
+          ? Get.isPlatformDarkMode
+              ? true
+              : false
+          : modeIndex == 1
+              ? false
+              : true,
+    ),
+  );
+
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+  runApp(MyApp(
+    currentLanguage: currentLanguage,
+  ));
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  const MyApp({
+    super.key,
+    this.currentLanguage,
+  });
 
-  // This widget is the root of your application.
+  final Locale? currentLanguage;
+
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // TRY THIS: Try running your application with "flutter run". You'll see
-        // the application has a blue toolbar. Then, without quitting the app,
-        // try changing the seedColor in the colorScheme below to Colors.green
-        // and then invoke "hot reload" (save your changes or press the "hot
-        // reload" button in a Flutter-supported IDE, or press "r" if you used
-        // the command line to start the app).
-        //
-        // Notice that the counter didn't reset back to zero; the application
-        // state is not lost during the reload. To reset the state, use hot
-        // restart instead.
-        //
-        // This works for code too, not just values: Most code changes can be
-        // tested with just a hot reload.
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
+    SystemChrome.setSystemUIOverlayStyle(
+      const SystemUiOverlayStyle(
+        statusBarColor: Colors.transparent,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
     );
-  }
-}
-
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-
-  // This widget is the home page of your application. It is stateful, meaning
-  // that it has a State object (defined below) that contains fields that affect
-  // how it looks.
-
-  // This class is the configuration for the state. It holds the values (in this
-  // case the title) provided by the parent (in this case the App widget) and
-  // used by the build method of the State. Fields in a Widget subclass are
-  // always marked "final".
-
-  final String title;
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      _counter++;
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
-    return Scaffold(
-      appBar: AppBar(
-        // TRY THIS: Try changing the color here to a specific color (to
-        // Colors.amber, perhaps?) and trigger a hot reload to see the AppBar
-        // change color while the other colors stay the same.
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
-        title: Text(widget.title),
-      ),
-      body: Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
-        child: Column(
-          // Column is also a layout widget. It takes a list of children and
-          // arranges them vertically. By default, it sizes itself to fit its
-          // children horizontally, and tries to be as tall as its parent.
-          //
-          // Column has various properties to control how it sizes itself and
-          // how it positions its children. Here we use mainAxisAlignment to
-          // center the children vertically; the main axis here is the vertical
-          // axis because Columns are vertical (the cross axis would be
-          // horizontal).
-          //
-          // TRY THIS: Invoke "debug painting" (choose the "Toggle Debug Paint"
-          // action in the IDE, or press "p" in the console), to see the
-          // wireframe for each widget.
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
+    return GetMaterialApp(
+      localizationsDelegates: [
+        AppLocalizations.delegate,
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
+      locale: currentLanguage,
+      supportedLocales: AppLocalizations.supportedLocales,
+      debugShowCheckedModeBanner: false,
+      title: 'Learn',
+      initialRoute: Home.id,
+      themeMode: ThemeMode.light,
+      getPages: [
+        GetPage(
+          name: Home.id,
+          page: () => Home(),
+          title: "الرئيسية",
+          transition: Transition.cupertinoDialog,
+          transitionDuration: Duration(milliseconds: 1000),
+          children: [
+            GetPage(
+              name: CollageMainPageDatiles.id,
+              page: () => CollageMainPageDatiles(),
+              title: "معلومات الكلية",
+              transition: Transition.cupertinoDialog,
+              transitionDuration: Duration(milliseconds: 1000),
             ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
+            GetPage(
+              name: NewsMainPageDatiles.id,
+              page: () => NewsMainPageDatiles(),
+              title: "الاخبار",
+              transition: Transition.cupertinoDialog,
+              transitionDuration: Duration(milliseconds: 1000),
+            ),
+            GetPage(
+              name: ActivitesMainPageDatiles.id,
+              page: () => ActivitesMainPageDatiles(),
+              title: "الانشطة",
+              transition: Transition.cupertinoDialog,
+              transitionDuration: Duration(milliseconds: 1000),
+            )
+          ],
+        ),
+        GetPage(
+          name: MainDashboardScreen.id,
+          page: () => MainDashboardScreen(),
+          title: "لوحة التحكم",
+          transition: Transition.cupertinoDialog,
+          transitionDuration: Duration(milliseconds: 1000),
+          children: [
+            GetPage(
+              name: UniversitySettings.id,
+              page: () => UniversitySettings(),
+              title: "الجامعة",
+              transition: Transition.cupertinoDialog,
+              transitionDuration: Duration(milliseconds: 1000),
+            ),
+            GetPage(
+              name: AcademicAffairs.id,
+              page: () => AcademicAffairs(),
+              title: "الشؤون الأكاديمية",
+              transition: Transition.cupertinoDialog,
+              transitionDuration: Duration(milliseconds: 1000),
             ),
           ],
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+        GetPage(
+          name: MainLectuers.id,
+          page: () => MainLectuers(),
+          title: "المحاضرات",
+          transition: Transition.cupertinoDialog,
+          transitionDuration: Duration(milliseconds: 1000),
+        ),
+        GetPage(
+          name: MainSubjectsScreen.id,
+          page: () => MainSubjectsScreen(),
+          title: "المواد الدراسية",
+          transition: Transition.cupertinoDialog,
+          transitionDuration: Duration(milliseconds: 1000),
+          children: [
+            GetPage(
+              name: SubjectsInfo.id,
+              page: () => SubjectsInfo(),
+              title: "معلومات المادة",
+              transition: Transition.cupertinoDialog,
+              transitionDuration: Duration(milliseconds: 1000),
+              children: [
+                GetPage(
+                  name: SubjectsMediaLinksDocs.id,
+                  page: () => SubjectsMediaLinksDocs(),
+                  title: "وسائط وروابط ومستندات",
+                  transition: Transition.cupertinoDialog,
+                  transitionDuration: Duration(milliseconds: 1000),
+                ),
+              ],
+            ),
+          ],
+        ),
+        GetPage(
+          name: MainExamsScreen.id,
+          page: () => MainExamsScreen(),
+          title: "الأختبارات",
+          transition: Transition.cupertinoDialog,
+          transitionDuration: Duration(milliseconds: 1000),
+        ),
+        GetPage(
+          name: Login.id,
+          page: () => Login(),
+          title: "تسجيل الدخول",
+          transition: Transition.cupertinoDialog,
+          transitionDuration: Duration(milliseconds: 1000),
+        ),
+        GetPage(
+          name: MainSettings.id,
+          page: () => MainSettings(),
+          title: "الأعدادات",
+          transition: Transition.cupertinoDialog,
+          transitionDuration: Duration(milliseconds: 1000),
+          children: [
+            GetPage(
+              name: ThemesMainSettings.id,
+              page: () => ThemesMainSettings(),
+              title: "الأعدادات - السمات",
+              transition: Transition.cupertinoDialog,
+              transitionDuration: Duration(milliseconds: 1000),
+            ),
+          ],
+        ),
+      ],
+      initialBinding: BindingsBuilder(() {
+        Get.put(TableController());
+        Get.put(MainController());
+      }),
     );
   }
 }
