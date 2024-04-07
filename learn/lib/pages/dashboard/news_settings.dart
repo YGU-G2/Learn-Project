@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:icons_plus/icons_plus.dart';
 import 'package:learn/controller/language_controller.dart';
-import 'package:learn/views/my_scaffold.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:learn/views/my_table/my_data_cell.dart';
 import 'package:learn/views/my_table/my_data_column.dart';

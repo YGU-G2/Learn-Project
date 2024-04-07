@@ -48,6 +48,7 @@ class Themes {
         // نوع الإضائة
         brightness: isDark ? Brightness.dark : Brightness.light,
         surface: Color(0xff111111),
+        surfaceTint: Colors.white,
         onSurface: (colorNumber == 1 || colorNumber == 3 || colorNumber == 5)
             ? Color(0xff111111)
             : Colors.white,

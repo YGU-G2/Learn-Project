@@ -17,6 +17,8 @@ class MyPasswordFormField extends StatefulWidget {
   final Widget? suffix;
   final int delay;
   final List<String? Function(String?)> validators;
+  final Function(String?)? onChanged;
+  final String? initialValue;
 
   const MyPasswordFormField({
     super.key,
@@ -31,6 +33,8 @@ class MyPasswordFormField extends StatefulWidget {
     this.delay = 700,
     required this.name,
     this.validators = const [],
+    this.onChanged,
+    this.initialValue,
   });
 
   @override
@@ -86,6 +90,8 @@ class _MyPasswordFormFieldState extends State<MyPasswordFormField> {
               curve: Curves.fastOutSlowIn,
               duration: Duration(milliseconds: 500),
               child: FormBuilderTextField(
+                initialValue: widget.initialValue,
+                onChanged: widget.onChanged ?? (value) {},
                 name: widget.name,
                 obscureText: isProtected,
                 maxLength: widget.maxLength,

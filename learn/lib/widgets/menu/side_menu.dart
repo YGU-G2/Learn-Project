@@ -36,16 +36,17 @@ class _SideMenuState extends State<SideMenu> {
           height: double.infinity,
           color: Theme.of(context).primaryColorDark,
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              UserInfoTap(
-                currentColor: selectedColor,
-                mainController: mainController,
-                Name: "إبراهيم الحربي",
-                Profission: "الأسطورة",
+              Expanded(
+                child: UserInfoTap(
+                  currentColor: selectedColor,
+                  mainController: mainController,
+                  name: "إبراهيم الحربي",
+                  profission: "الأسطورة",
+                ),
               ),
-              SizedBox(
-                height: MediaQuery.of(context).size.height - 270,
+              Expanded(
+                flex: 2,
                 child: SingleChildScrollView(
                   child: Column(
                     children: List.generate(

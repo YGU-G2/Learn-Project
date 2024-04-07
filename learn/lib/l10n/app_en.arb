@@ -270,5 +270,41 @@
   "search": "Search",
   "pagination": "Pagination",
   "searchField": "Search...",
-  "exams": "Exams"
+  "exams": "Exams",
+  "jobTitle": "Job Title",
+  "teacher": "Teacher",
+  "doctor": "Doctor",
+  "permisions": "Permisions",
+  "permision": "Permision",
+  "title": "Title",
+  "permisionTitle": "Permision Title",
+  "dashboardPermisions": "Dashboard Permisions",
+  "showUniversityData": "Show University Data",
+  "editUniversityData": "Edit University Data",
+  "showColleges": "Show Colleges",
+  "addColleges": "Add Colleges",
+  "editColleges": "Edit Colleges",
+  "deleteColleges": "Delete Colleges",
+  "showNews": "Show News",
+  "addNews": "Add News",
+  "editNews": "Edit News",
+  "deleteNews": "Delete News",
+  "showActivitys": "Show Activitys",
+  "addActivitys": "Add Activitys",
+  "editActivitys": "Edit Activitys",
+  "deleteActivitys": "Delete Activitys",
+  "acadmeicAffairsPermisions": "Academic Affairs Permisions",
+  "showAcademicStaff": "Show Academic Staff",
+  "addAcademicStaff": "Add Academic Staff",
+  "editAcademicStaff": "Edit Academic Staff",
+  "deleteAcademicStaff": "Delete Academic Staff",
+  "display": "Display {display}",
+  "@display": {
+    "placeholders": {
+      "display": {
+        "content": "{display}",
+        "example": "3"
+      }
+    }
+  }
 }

@@ -37,7 +37,8 @@ class _LoginState extends State<Login> {
       ),
     );
     return MyScaffold(
-      appLocalizations: appLocalizations!,
+      appLocalizations: appLocalizations,
+      useAppBar: false,
       bodyBackground: Theme.of(context).colorScheme.background,
       body: SizedBox(
         height: MediaQuery.of(context).size.height,

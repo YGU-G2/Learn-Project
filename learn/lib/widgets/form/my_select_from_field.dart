@@ -6,7 +6,7 @@ import 'package:get/get.dart';
 
 class MySelectFormField extends StatelessWidget {
   final String name;
-  final List options;
+  final List<Map> options;
   final double width;
   final String title;
   final bool isRequired;
@@ -89,8 +89,10 @@ class MySelectFormField extends StatelessWidget {
                 items: options.toSet().toList().map<DropdownMenuItem>(
                   (option) {
                     return DropdownMenuItem(
-                      value: option,
-                      child: Text(option ?? ""),
+                      value: option.keys.first,
+                      child: option.values.first is String
+                          ? Text(option.values.first ?? "")
+                          : option.values.first,
                     );
                   },
                 ).toList(),
