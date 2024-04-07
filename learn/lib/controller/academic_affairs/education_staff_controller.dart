@@ -7,14 +7,15 @@ import 'package:learn/models/education_staff.dart';
 import 'package:learn/utils/my_alert.dart';
 import 'package:intl/intl.dart';
 
-class AcademicAffairsController extends GetxController {
+class EducationStaffController extends GetxController {
   static final FirebaseFirestore _firestore = FirebaseFirestore.instance;
-  static final RxBool isAddEditEndEducationStaffIsLoading = false.obs;
+  static final RxBool isAddAndEditEducationStaffIsLoading = false.obs;
   static final RxBool isEducationStaffEditBtnEnable = false.obs;
-  static final RxBool isEducationStaffEditWaiting = false.obs;
   static final RxString educationStaffWaitingBtn = "".obs;
-  static final RxBool isEducationStaffDeleteWaiting = false.obs;
   static final RxString educationStaffSearchValue = "all".obs;
+  static final RxBool isEducationStaffOperationWaiting = false.obs;
+  static final RxString isEducationStaffOperationType = "".obs;
+  static final RxString isEducationStaffOperationId = "".obs;
 
   static Future<bool> isAcademicNumberExists({
     required String academicNumber,
@@ -49,7 +50,7 @@ class AcademicAffairsController extends GetxController {
   }
 
   static Future<void> addEducationStaff(EducationStaff educationStaff) async {
-    isAddEditEndEducationStaffIsLoading.value = true;
+    isAddAndEditEducationStaffIsLoading.value = true;
     if (!await isAcademicNumberExists(
       academicNumber: educationStaff.educationStaffAcademicNumber,
     )) {
@@ -67,6 +68,11 @@ class AcademicAffairsController extends GetxController {
           educationStaff.educationStaffBirthDate,
         ),
         'isEducationStaffDeleted': educationStaff.isEducationStaffDeleted,
+        'educationStaffJobTitle': educationStaff.educationStaffJobTitle,
+        'educationStaffPassword': educationStaff.educationStaffPassword.isEmpty
+            ? "00000000"
+            : educationStaff.educationStaffPassword,
+        'educationStaffPermisions': educationStaff.educationStaffPermisions,
       }).then((value) {
         MyAlert.snackbar(
           title: LanguageController.getCurrentLanguage() == "ar"
@@ -101,7 +107,7 @@ class AcademicAffairsController extends GetxController {
         colorText: Get.theme.primaryColorLight,
       );
     }
-    isAddEditEndEducationStaffIsLoading.value = false;
+    isAddAndEditEducationStaffIsLoading.value = false;
   }
 
   static Future<EducationStaff> getEducationStaffById(
@@ -117,19 +123,24 @@ class AcademicAffairsController extends GetxController {
       date = format.parse(documentSnapshot['educationStaffBirthDate']);
     }
     return EducationStaff(
-        educationStaffId: documentSnapshot.id,
-        educationStaffName: documentSnapshot['educationStaffName'],
-        educationStaffAcademicNumber:
-            documentSnapshot['educationStaffAcademicNumber'],
-        educationStaffAcademicDegree:
-            documentSnapshot['educationStaffAcademicDegree'],
-        educationStaffGender: documentSnapshot['educationStaffGender'],
-        educationStaffBirthDate: date,
-        isEducationStaffDeleted: documentSnapshot['isEducationStaffDeleted']);
+      educationStaffId: documentSnapshot.id,
+      educationStaffName: documentSnapshot['educationStaffName'],
+      educationStaffAcademicNumber:
+          documentSnapshot['educationStaffAcademicNumber'],
+      educationStaffAcademicDegree:
+          documentSnapshot['educationStaffAcademicDegree'],
+      educationStaffGender: documentSnapshot['educationStaffGender'],
+      educationStaffBirthDate: date,
+      isEducationStaffDeleted: documentSnapshot['isEducationStaffDeleted'],
+      educationStaffJobTitle: documentSnapshot['educationStaffJobTitle'],
+      educationStaffPassword: documentSnapshot['educationStaffPassword'],
+      educationStaffPermisions: documentSnapshot['educationStaffPermisions'],
+      educationStaffPermisionName: documentSnapshot['educationStaffPermisionName'],
+    );
   }
 
   static Future<void> editEducationStaff(EducationStaff educationStaff) async {
-    isAddEditEndEducationStaffIsLoading.value = true;
+    isAddAndEditEducationStaffIsLoading.value = true;
     if (!await isAcademicNumberExists(
       academicNumber: educationStaff.educationStaffAcademicNumber,
       educationStaffId: educationStaff.educationStaffId,
@@ -148,6 +159,11 @@ class AcademicAffairsController extends GetxController {
           educationStaff.educationStaffBirthDate,
         ),
         'isEducationStaffDeleted': educationStaff.isEducationStaffDeleted,
+        'educationStaffJobTitle': educationStaff.educationStaffJobTitle,
+        'educationStaffPassword': educationStaff.educationStaffPassword.isEmpty
+            ? "00000000"
+            : educationStaff.educationStaffPassword,
+        'educationStaffPermisions': educationStaff.educationStaffPermisions,
       }).then((value) {
         MyAlert.snackbar(
           title: LanguageController.getCurrentLanguage() == "ar"
@@ -182,13 +198,13 @@ class AcademicAffairsController extends GetxController {
         colorText: Get.theme.primaryColorLight,
       );
     }
-    isAddEditEndEducationStaffIsLoading.value = false;
+    isAddAndEditEducationStaffIsLoading.value = false;
   }
 
   static Future<void> deleteEducationStaff({
     required String educationStaffId,
   }) async {
-    isEducationStaffDeleteWaiting.value = true;
+    isEducationStaffOperationWaiting.value = true;
     await _firestore
         .collection('education_staff')
         .doc(educationStaffId)
@@ -219,7 +235,7 @@ class AcademicAffairsController extends GetxController {
         }
       },
     );
-    isEducationStaffDeleteWaiting.value = false;
+    isEducationStaffOperationWaiting.value = false;
   }
 
   static Stream<QuerySnapshot<Map<String, dynamic>>>? getEducationStaffData(
@@ -242,7 +258,8 @@ class AcademicAffairsController extends GetxController {
           )
           // .where('educationStaffName', isGreaterThanOrEqualTo: value.value)
           // .where('educationStaffName', isLessThanOrEqualTo: value.value + '\uf8ff')
-          .where('educationStaffName', arrayContains: value.value.toString() + "\uf8ff")
+          .where('educationStaffName',
+              arrayContains: value.value.toString() + "\uf8ff")
           .snapshots();
     }
   }
@@ -252,7 +269,7 @@ class AcademicAffairsController extends GetxController {
   }) async {
     bool f = true;
     var i = 0;
-    isEducationStaffDeleteWaiting.value = true;
+    isEducationStaffOperationWaiting.value = true;
     for (i; i < educationStaffIds.length; i++) {
       await _firestore
           .collection('education_staff')
@@ -289,6 +306,6 @@ class AcademicAffairsController extends GetxController {
             : "Deleted $i Rows Successfull",
       );
     }
-    isEducationStaffDeleteWaiting.value = false;
+    isEducationStaffOperationWaiting.value = false;
   }
 }

@@ -10,13 +10,13 @@ import 'package:learn/widgets/color_swap.dart';
 class UserInfoTap extends StatefulWidget {
   const UserInfoTap({
     super.key,
-    required this.Name,
-    required this.Profission,
+    required this.name,
+    required this.profission,
     required this.mainController,
     required this.currentColor,
   });
 
-  final String Name, Profission;
+  final String name, profission;
   final MainController mainController;
   final ColorItems currentColor;
 
@@ -57,6 +57,7 @@ class _UserInfoTapState extends State<UserInfoTap> {
   @override
   Widget build(BuildContext context) {
     return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
       children: [
         ListTile(
           splashColor: Theme.of(context).splashColor,
@@ -123,7 +124,7 @@ class _UserInfoTapState extends State<UserInfoTap> {
                 ],
               ),
               Text(
-                widget.Name,
+                widget.name,
                 style: TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
@@ -133,7 +134,7 @@ class _UserInfoTapState extends State<UserInfoTap> {
             ],
           ),
           subtitle: Text(
-            widget.Profission,
+            widget.profission,
             style: TextStyle(
               fontSize: 16,
               fontWeight: FontWeight.w600,

@@ -21,6 +21,7 @@ class MyTextFormField extends StatelessWidget {
   final List<String? Function(String?)> validators;
   final Function(String?)? onChanged;
   final String? initialValue;
+  final bool readOnly;
 
   const MyTextFormField({
     super.key,
@@ -40,6 +41,7 @@ class MyTextFormField extends StatelessWidget {
     this.validators = const [],
     this.onChanged,
     this.initialValue,
+    this.readOnly = false,
   });
 
   @override
@@ -89,6 +91,7 @@ class MyTextFormField extends StatelessWidget {
               curve: Curves.fastOutSlowIn,
               duration: Duration(milliseconds: 500),
               child: FormBuilderTextField(
+                readOnly: readOnly,
                 initialValue: initialValue,
                 onChanged: onChanged ?? (value) {},
                 maxLines: maxLines,

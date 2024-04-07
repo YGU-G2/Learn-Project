@@ -270,5 +270,41 @@
   "search": "البحث",
   "pagination": "تقسيم الصفحات",
   "searchField": "بحث...",
-  "exams": "الأختبارات"
+  "exams": "الأختبارات",
+  "jobTitle": "المسمى الوظيفي",
+  "teacher": "أستاذ",
+  "doctor": "دكتور",
+  "permisions": "الصلاحيات",
+  "permision": "صلاحية",
+  "title": "العنوان",
+  "permisionTitle": "عنوان الصلاحية",
+  "dashboardPermisions": "صلاحيات لوحة التحكم",
+  "showUniversityData": "عرض بيانات الجامعة",
+  "editUniversityData": "تعديل بيانات الجامعة",
+  "showColleges": "عرض الكليات",
+  "addColleges": "إضافة الكليات",
+  "editColleges": "تعديل الكليات",
+  "deleteColleges": "حذف الكليات",
+  "showNews": "عرض الأخبار",
+  "addNews": "إضافة الأخبار",
+  "editNews": "تعديل الأخبار",
+  "deleteNews": "حذف الأخبار",
+  "showActivitys": "عرض الأنشطة",
+  "addActivitys": "إضافة الأنشطة",
+  "editActivitys": "تعديل الأنشطة",
+  "deleteActivitys": "حذف الأنشطة",
+  "acadmeicAffairsPermisions": "صلاحيات الشؤون الأكاديمية",
+  "showAcademicStaff": "عرض الكادر التعليمي",
+  "addAcademicStaff": "إضافة الكادر التعليمي",
+  "editAcademicStaff": "تعديل الكادر التعليمي",
+  "deleteAcademicStaff": "حذف الكادر التعليمي",
+  "display": "عرض {display}",
+  "@display": {
+    "placeholders": {
+      "display": {
+        "content": "{display}",
+        "example": "3"
+      }
+    }
+  }
 }
