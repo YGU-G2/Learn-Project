@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:learn/controller/language_controller.dart';
 import 'package:learn/controller/main_controller.dart';
+import 'package:learn/screens/chats/main_chat_screen.dart';
+import 'package:learn/screens/chats/single_chat_screen.dart';
 import 'package:learn/screens/dashboard/academic_affairs/academic_affairs.dart';
 import 'package:learn/screens/dashboard/main_dashboard_screen.dart';
 import 'package:learn/screens/dashboard/university/university_settings.dart';
@@ -36,6 +38,8 @@ class MyScaffold extends StatefulWidget {
   final Color? bodyBackground;
   final bool hasBack;
   final AppLocalizations appLocalizations;
+  final bool showMenuBtn;
+  final Widget? appBarContent;
 
   const MyScaffold({
     super.key,
@@ -48,6 +52,8 @@ class MyScaffold extends StatefulWidget {
     this.hasBack = true,
     required this.appLocalizations,
     this.name,
+    this.showMenuBtn = true,
+    this.appBarContent,
   });
 
   @override
@@ -136,7 +142,10 @@ class _MyScaffoldState extends State<MyScaffold>
       MenuItems(
         title: widget.appLocalizations.chat,
         icon: CupertinoIcons.chat_bubble_2_fill,
-        key: ["b"],
+        key: [
+          MainChatScreen.id,
+          "${MainChatScreen.id}/${SingleChatScreen.id}",
+        ],
       ),
       MenuItems(
         title: widget.appLocalizations.lectuers,
@@ -180,11 +189,15 @@ class _MyScaffoldState extends State<MyScaffold>
           Scaffold(
             appBar: widget.useAppBar
                 ? PreferredSize(
-                    preferredSize: Size(MediaQuery.of(context).size.width, 70),
+                    preferredSize: Size(
+                      MediaQuery.of(context).size.width,
+                      70,
+                    ),
                     child: MyAppBar(
                       animation: animation,
                       hasBack: widget.hasBack,
                       appLocalizations: widget.appLocalizations,
+                      content: widget.appBarContent,
                     ),
                   )
                 : null,
@@ -317,36 +330,37 @@ class _MyScaffoldState extends State<MyScaffold>
                   )
                 : null,
           ),
-          AnimatedPositioned(
-            duration: const Duration(milliseconds: 300),
-            curve: Curves.fastOutSlowIn,
-            right: LanguageController.currentLanguage == "system"
-                ? Get.deviceLocale!.languageCode == "ar"
-                    ? isSideBarClosed
-                        ? 0
-                        : 230
-                    : null
-                : LanguageController.currentLanguage == "ar"
-                    ? isSideBarClosed
-                        ? 0
-                        : 230
-                    : null,
-            left: LanguageController.currentLanguage == "system"
-                ? Get.deviceLocale!.languageCode == "ar"
-                    ? null
-                    : isSideBarClosed
-                        ? 0
-                        : 230
-                : LanguageController.currentLanguage == "ar"
-                    ? null
-                    : isSideBarClosed
-                        ? 0
-                        : 230,
-            child: MenuBtn(
-              press: () => changeSideBarStatus(),
-              isSideBarClosed: isSideBarClosed,
+          if (widget.showMenuBtn)
+            AnimatedPositioned(
+              duration: const Duration(milliseconds: 300),
+              curve: Curves.fastOutSlowIn,
+              right: LanguageController.currentLanguage == "system"
+                  ? Get.deviceLocale!.languageCode == "ar"
+                      ? isSideBarClosed
+                          ? 0
+                          : 230
+                      : null
+                  : LanguageController.currentLanguage == "ar"
+                      ? isSideBarClosed
+                          ? 0
+                          : 230
+                      : null,
+              left: LanguageController.currentLanguage == "system"
+                  ? Get.deviceLocale!.languageCode == "ar"
+                      ? null
+                      : isSideBarClosed
+                          ? 0
+                          : 230
+                  : LanguageController.currentLanguage == "ar"
+                      ? null
+                      : isSideBarClosed
+                          ? 0
+                          : 230,
+              child: MenuBtn(
+                press: () => changeSideBarStatus(),
+                isSideBarClosed: isSideBarClosed,
+              ),
             ),
-          ),
         ],
       ),
     );
