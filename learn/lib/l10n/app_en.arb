@@ -306,5 +306,7 @@
         "example": "3"
       }
     }
-  }
+  },
+  "groups": "Groups",
+  "onLine": "On Line"
 }

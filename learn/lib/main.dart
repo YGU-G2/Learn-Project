@@ -5,6 +5,8 @@ import 'package:learn/controller/language_controller.dart';
 import 'package:learn/controller/main_controller.dart';
 import 'package:learn/controller/table_controller.dart';
 import 'package:learn/controller/theme_controller.dart';
+import 'package:learn/screens/chats/main_chat_screen.dart';
+import 'package:learn/screens/chats/single_chat_screen.dart';
 import 'package:learn/screens/dashboard/academic_affairs/academic_affairs.dart';
 import 'package:learn/screens/dashboard/main_dashboard_screen.dart';
 import 'package:learn/screens/dashboard/university/university_settings.dart';
@@ -121,6 +123,22 @@ class MyApp extends StatelessWidget {
               transition: Transition.cupertinoDialog,
               transitionDuration: Duration(milliseconds: 1000),
             )
+          ],
+        ),
+        GetPage(
+          name: MainChatScreen.id,
+          page: () => MainChatScreen(),
+          title: "الدردشات",
+          transition: Transition.cupertinoDialog,
+          transitionDuration: Duration(milliseconds: 1000),
+          children: [
+            GetPage(
+              name: SingleChatScreen.id,
+              page: () => SingleChatScreen(),
+              title: "الدردشةالفردية",
+              transition: Transition.cupertinoDialog,
+              transitionDuration: Duration(milliseconds: 1000),
+            ),
           ],
         ),
         GetPage(
