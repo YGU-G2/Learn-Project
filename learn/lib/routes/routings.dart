@@ -82,7 +82,7 @@ class Routings {
             GetPage(
               name: SingleChatScreen.id,
               page: () => SingleChatScreen(),
-              title: "الدردشةالفردية",
+              title: "الدردشة الفردية",
               transition: Transition.cupertinoDialog,
               transitionDuration: Duration(milliseconds: 1000),
             ),
