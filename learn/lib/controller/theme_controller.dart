@@ -1,4 +1,3 @@
-import 'package:animated_theme_switcher/animated_theme_switcher.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:learn/themes/themes.dart';
@@ -53,6 +52,6 @@ class ThemeController {
 
   static Future<int> getThemeModeIndex() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    return prefs.getInt(themeModeIndexKey) ?? 2;
+    return prefs.getInt(themeModeIndexKey) ?? 0;
   }
 }

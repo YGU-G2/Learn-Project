@@ -73,6 +73,7 @@ class EducationStaffController extends GetxController {
             ? "00000000"
             : educationStaff.educationStaffPassword,
         'educationStaffPermisions': educationStaff.educationStaffPermisions,
+        'educationStaffPermisionName': educationStaff.educationStaffPermisionName,
       }).then((value) {
         MyAlert.snackbar(
           title: LanguageController.getCurrentLanguage() == "ar"
@@ -164,6 +165,8 @@ class EducationStaffController extends GetxController {
             ? "00000000"
             : educationStaff.educationStaffPassword,
         'educationStaffPermisions': educationStaff.educationStaffPermisions,
+        'educationStaffPermisionName':
+            educationStaff.educationStaffPermisionName,
       }).then((value) {
         MyAlert.snackbar(
           title: LanguageController.getCurrentLanguage() == "ar"

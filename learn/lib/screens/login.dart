@@ -4,6 +4,7 @@ import 'package:animate_do/animate_do.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
+import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:get/get.dart';
 import 'package:learn/controller/language_controller.dart';
 import 'package:learn/views/my_scaffold.dart';
@@ -15,18 +16,24 @@ import 'package:wave/config.dart';
 import 'package:wave/wave.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-class Login extends StatefulWidget {
+class Login extends StatelessWidget {
   static String id = "/login";
-  const Login({super.key});
 
-  @override
-  State<Login> createState() => _LoginState();
-}
+  const Login({
+    super.key,
+  });
 
-class _LoginState extends State<Login> {
   @override
   Widget build(BuildContext context) {
+    final loginFormKey = GlobalKey<FormBuilderState>();
     final appLocalizations = AppLocalizations.of(context);
+
+    void onLoginFieldsChanges(String name) {
+      loginFormKey.currentState!.fields[name]!.validate(
+        focusOnInvalid: false,
+      );
+    }
+
     Widget forgotThePassword = TextButton(
       onPressed: () {},
       child: Text(
@@ -162,6 +169,7 @@ class _LoginState extends State<Login> {
                 ],
               ),
               FormBuilder(
+                key: loginFormKey,
                 child: SizedBox(
                   width: MediaQuery.of(context).size.width - 50,
                   child: Card(
@@ -178,30 +186,55 @@ class _LoginState extends State<Login> {
                             ),
                           ),
                           MyTextFormField(
-                            name: "",
+                            name: "loginAcademicNumber",
                             delay: 1100,
                             fillColor: Theme.of(context).colorScheme.background,
                             prefix: Icon(
                               Icons.person,
                             ),
+                            onChanged: (value) {
+                              onLoginFieldsChanges(
+                                "loginAcademicNumber",
+                              );
+                            },                            
                             title: appLocalizations.academicNumber,
                             isRequired: true,
                             maxLength: 15,
                             keyboardType: TextInputType.number,
-                            label: Text(appLocalizations.enter(appLocalizations
-                                .the(appLocalizations.academicNumber))),
+                            label: Text(
+                              appLocalizations.enter(
+                                appLocalizations.the(
+                                  appLocalizations.academicNumber,
+                                ),
+                              ),
+                            ),
+                            validators: [
+                              FormBuilderValidators.required(
+                                errorText: appLocalizations.requiredField,
+                              ),                              
+                            ],
                           ),
                           MyPasswordFormField(
-                            name: "",
+                            name: "loginPassword",
                             delay: 1300,
-                            prefix: Icon(
+                            prefix: const Icon(
                               Icons.lock,
                               size: 20,
                             ),
+                            onChanged: (value) {
+                              onLoginFieldsChanges(
+                                "loginPassword",
+                              );
+                            },
                             title: appLocalizations.password,
                             isRequired: true,
-                            label: Text(appLocalizations.enter(appLocalizations
-                                .the(appLocalizations.password))),
+                            label: Text(
+                              appLocalizations.enter(
+                                appLocalizations.the(
+                                  appLocalizations.password,
+                                ),
+                              ),
+                            ),
                             keyboardType: TextInputType.visiblePassword,
                           ),
                           Align(
