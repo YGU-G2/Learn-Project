@@ -306,9 +306,12 @@
         "example": "3"
       }
     }
-  }
-  ,
-  "groups": "المجموعات"
-  ,
-  "onLine": "متصل الان"
+  },
+  "groups": "المجموعات",
+  "onLine": "متصل الان",
+  "studentsAffairs": "شؤون الطلاب",
+  "students": "الطلاب",
+  "specialization": "التخصص",
+  "term": "الترم",
+  "student": "طالب"
 }

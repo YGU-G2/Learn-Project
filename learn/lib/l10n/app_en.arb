@@ -308,5 +308,10 @@
     }
   },
   "groups": "Groups",
-  "onLine": "On Line"
+  "onLine": "On Line",
+  "studentsAffairs": "Students Affairs",
+  "students": "Students",
+  "specialization": "Specialization",
+  "term": "Term",
+  "student": "Student"
 }
