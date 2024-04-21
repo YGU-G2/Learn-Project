@@ -83,10 +83,12 @@ class MyApp extends StatelessWidget {
       initialRoute: Home.id,
       themeMode: ThemeMode.light,
       getPages: Routings.routes,
-      initialBinding: BindingsBuilder(() {
-        Get.put(TableController());
-        Get.put(MainController());
-      }),
+      initialBinding: BindingsBuilder(
+        () {
+          Get.put(TableController());
+          Get.put(MainController());
+        },
+      ),
     );
   }
 }
