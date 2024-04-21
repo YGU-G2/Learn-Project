@@ -306,9 +306,12 @@
         "example": "3"
       }
     }
-  }
-  ,
-  "groups": "المجموعات"
-  ,
-  "onLine": "متصل الان"
+  },
+  "groups": "المجموعات",
+  "onLine": "متصل الان",
+  "specialties": "التخصصات",
+  "specializationNumber": "رقم التخصص",
+  "specializationName": "اسم التخصص",
+  "numberOfYears": "عددالسنوات",
+  "specialty": "تخصص"
 }

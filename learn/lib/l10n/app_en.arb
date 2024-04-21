@@ -308,5 +308,10 @@
     }
   },
   "groups": "Groups",
-  "onLine": "On Line"
+  "onLine": "On Line",
+  "specialties": "Specialties",
+  "specializationNumber": "Specialization Number",
+  "specializationName": "Specialization Name",
+  "numberOfYears": "Number Of Years",
+  "specialty": "Specialty"
 }
