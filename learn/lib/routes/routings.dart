@@ -4,7 +4,7 @@ import 'package:learn/screens/dashboard/main_dashboard_screen.dart';
 import 'package:learn/screens/dashboard/university/university_settings.dart';
 import 'package:learn/screens/exams/main_exams_screen.dart';
 import 'package:learn/screens/chats/main_chat_screen.dart';
-import 'package:learn/screens/chats/single_chat_screen.dart';
+import 'package:learn/screens/chats/chat_screen.dart';
 import 'package:learn/screens/home/actitvites_main_page_datiles.dart';
 import 'package:learn/screens/home/collage_main_page_datiles.dart';
 import 'package:learn/screens/home/home.dart';
@@ -80,8 +80,8 @@ class Routings {
           transitionDuration: Duration(milliseconds: 1000),
           children: [
             GetPage(
-              name: SingleChatScreen.id,
-              page: () => SingleChatScreen(),
+              name: ChatScreen.id,
+              page: () => ChatScreen(),
               title: "الدردشة الفردية",
               transition: Transition.cupertinoDialog,
               transitionDuration: Duration(milliseconds: 1000),
