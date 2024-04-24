@@ -5,7 +5,7 @@ import 'package:learn/screens/dashboard/students_affairs/students_affairs.dart';
 import 'package:learn/screens/dashboard/university/university_settings.dart';
 import 'package:learn/screens/exams/main_exams_screen.dart';
 import 'package:learn/screens/chats/main_chat_screen.dart';
-import 'package:learn/screens/chats/single_chat_screen.dart';
+import 'package:learn/screens/chats/chat_screen.dart';
 import 'package:learn/screens/home/actitvites_main_page_datiles.dart';
 import 'package:learn/screens/home/collage_main_page_datiles.dart';
 import 'package:learn/screens/home/home.dart';

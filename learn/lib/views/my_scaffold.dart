@@ -6,7 +6,7 @@ import 'package:get/get.dart';
 import 'package:learn/controller/language_controller.dart';
 import 'package:learn/controller/main_controller.dart';
 import 'package:learn/screens/chats/main_chat_screen.dart';
-import 'package:learn/screens/chats/single_chat_screen.dart';
+import 'package:learn/screens/chats/chat_screen.dart';
 import 'package:learn/screens/dashboard/academic_affairs/academic_affairs.dart';
 import 'package:learn/screens/dashboard/main_dashboard_screen.dart';
 import 'package:learn/screens/dashboard/students_affairs/students_affairs.dart';
@@ -146,7 +146,7 @@ class _MyScaffoldState extends State<MyScaffold>
         icon: CupertinoIcons.chat_bubble_2_fill,
         key: [
           MainChatScreen.id,
-          "${MainChatScreen.id}/${SingleChatScreen.id}",
+          "${MainChatScreen.id}/${ChatScreen.id}",
         ],
       ),
       MenuItems(

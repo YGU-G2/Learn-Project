@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:learn/widgets/chat_list_tile.dart';
+import 'package:learn/widgets/chats/chat_list_tile.dart';
 
 class ChatsPage extends StatelessWidget {
   final AppLocalizations appLocalizations;
@@ -23,6 +23,7 @@ class ChatsPage extends StatelessWidget {
           subTitle: "hi",
           title: "maged alamri",
           delay: 500,
+          chatHeroTag: "1",
         ),
         ChatListTile(
           appLocalizations: appLocalizations,
@@ -33,6 +34,7 @@ class ChatsPage extends StatelessWidget {
           title: "University",
           lastDate: "3:44pm",
           delay: 550,
+          chatHeroTag: "a",
         ),
         ChatListTile(
           appLocalizations: appLocalizations,
@@ -42,6 +44,7 @@ class ChatsPage extends StatelessWidget {
           subTitle: "hi",
           title: "maged alamri",
           delay: 600,
+          chatHeroTag: "b",
         ),
         ChatListTile(
           appLocalizations: appLocalizations,
@@ -51,6 +54,7 @@ class ChatsPage extends StatelessWidget {
           subTitle: "hi",
           title: "maged alamri",
           delay: 650,
+          chatHeroTag: "chatImage",
         ),
       ],
     );
