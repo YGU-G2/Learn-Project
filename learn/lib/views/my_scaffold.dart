@@ -9,6 +9,7 @@ import 'package:learn/screens/chats/main_chat_screen.dart';
 import 'package:learn/screens/chats/chat_screen.dart';
 import 'package:learn/screens/dashboard/academic_affairs/academic_affairs.dart';
 import 'package:learn/screens/dashboard/main_dashboard_screen.dart';
+import 'package:learn/screens/dashboard/students_affairs/students_affairs.dart';
 import 'package:learn/screens/dashboard/university/university_settings.dart';
 import 'package:learn/screens/exams/main_exams_screen.dart';
 import 'package:learn/screens/home/actitvites_main_page_datiles.dart';
@@ -137,6 +138,7 @@ class _MyScaffoldState extends State<MyScaffold>
           MainDashboardScreen.id,
           "${MainDashboardScreen.id}/${UniversitySettings.id}",
           "${MainDashboardScreen.id}/${AcademicAffairs.id}",
+          "${MainDashboardScreen.id}/${StudentsAffairs.id}",
         ],
       ),
       MenuItems(

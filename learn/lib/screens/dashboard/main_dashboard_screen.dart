@@ -2,6 +2,7 @@ import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:learn/screens/dashboard/academic_affairs/academic_affairs.dart';
+import 'package:learn/screens/dashboard/students_affairs/students_affairs.dart';
 import 'package:learn/screens/dashboard/university/university_settings.dart';
 import 'package:learn/views/my_scaffold.dart';
 import 'package:learn/widgets/body_title.dart';
@@ -67,9 +68,13 @@ class MainDashboardScreen extends StatelessWidget {
                 curve: Curves.fastOutSlowIn,
                 duration: Duration(milliseconds: 500),
                 child: CardButton(
-                  text: "شؤون الطلاب",
+                  text: appLocalizations.studentsAffairs,
                   icon: Icons.groups_3_rounded,
-                  onPressed: () {},
+                  onPressed: () {
+                    Get.toNamed(
+                      "${MainDashboardScreen.id}/${StudentsAffairs.id}",
+                    );
+                  },
                 ),
               ),
               ZoomIn(
