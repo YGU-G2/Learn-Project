@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:get/get.dart';
 import 'package:learn/screens/chats/main_chat_screen.dart';
-import 'package:learn/screens/chats/single_chat_screen.dart';
+import 'package:learn/screens/chats/chat_screen.dart';
 
 class ChatListTile extends StatelessWidget {
   final AppLocalizations appLocalizations;
@@ -14,6 +14,7 @@ class ChatListTile extends StatelessWidget {
   final String? lastDate;
   final int messageCount;
   final int delay;
+  final String? chatHeroTag;
 
   const ChatListTile({
     super.key,
@@ -25,6 +26,7 @@ class ChatListTile extends StatelessWidget {
     required this.messageCount,
     required this.appLocalizations,
     this.delay = 200,
+    this.chatHeroTag,
   });
 
   @override
@@ -42,7 +44,7 @@ class ChatListTile extends StatelessWidget {
           ),
         ),
         onPressed: () {
-          Get.toNamed("${MainChatScreen.id}/${SingleChatScreen.id}");
+          Get.toNamed("${MainChatScreen.id}/${ChatScreen.id}");
         },
         child: ListTile(
           title: Row(
@@ -72,13 +74,16 @@ class ChatListTile extends StatelessWidget {
               fontSize: Get.width * 0.035,
             ),
           ),
-          leading: ClipRRect(
-            borderRadius: BorderRadius.circular(50),
-            child: Image.asset(
-              imagePath,
-              width: 60,
-              height: 60,
-              fit: BoxFit.cover,
+          leading: Hero(
+            tag: chatHeroTag ?? "",
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(100),
+              child: Image.asset(
+                imagePath,
+                width: 55,
+                height: 55,
+                fit: BoxFit.cover,
+              ),
             ),
           ),
           trailing: CircleAvatar(

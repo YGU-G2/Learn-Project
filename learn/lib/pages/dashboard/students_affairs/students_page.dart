@@ -2,7 +2,6 @@ import 'dart:math';
 
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:get/get.dart';
 import 'package:icons_plus/icons_plus.dart';
 import 'package:learn/controller/language_controller.dart';
@@ -10,18 +9,22 @@ import 'package:learn/views/my_table/my_data_cell.dart';
 import 'package:learn/views/my_table/my_data_column.dart';
 import 'package:learn/views/my_table/my_table.dart';
 import 'package:learn/widgets/body_title.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:learn/widgets/form/my_date_form_field.dart';
 import 'package:learn/widgets/form/my_text_form_field.dart';
 import 'package:learn/widgets/my_button.dart';
 
-class ActvitiesSettings extends StatelessWidget {
-  const ActvitiesSettings({super.key, required this.appLocalizations});
+class StudentsPage extends StatelessWidget {
+  const StudentsPage({
+    super.key,
+    required this.appLocalizations,
+  });
 
   final AppLocalizations appLocalizations;
 
   @override
   Widget build(BuildContext context) {
-    void _activityAddEditDialog() {
+    void _studentsAddEditDialog() {
       showDialog(
         context: context,
         builder: (context) {
@@ -72,7 +75,7 @@ class ActvitiesSettings extends StatelessWidget {
                   ),
                   BodyTitle(
                     title: appLocalizations.add(
-                      appLocalizations.oneActivity,
+                      appLocalizations.student,
                     ),
                   ),
                 ],
@@ -87,70 +90,55 @@ class ActvitiesSettings extends StatelessWidget {
                   ),
                   child: ListView(
                     children: [
-                      Column(
-                        children: [
-                          FlipInY(
-                            delay: Duration(milliseconds: 700),
-                            curve: Curves.fastOutSlowIn,
-                            duration: Duration(milliseconds: 500),
-                            child: Text(
-                              appLocalizations.activityImage,
-                              style: TextStyle(
-                                fontSize: Get.width * 0.04, // 16
-                                fontWeight: FontWeight.bold,
-                                color: Theme.of(context).primaryColorLight,
-                              ),
-                            ),
-                          ),
-                          SizedBox(
-                            height: 20,
-                          ),
-                          ZoomIn(
-                            delay: Duration(milliseconds: 900),
-                            curve: Curves.fastOutSlowIn,
-                            duration: Duration(milliseconds: 500),
-                            child: Stack(
-                              alignment: Alignment.bottomRight,
-                              children: [
-                                CircleAvatar(
-                                  child: Image.asset("assets/images/Logo.png"),
-                                  radius: Get.width * 0.28,
-                                  backgroundColor:
-                                      Get.theme.colorScheme.background,
-                                ),
-                                Transform.translate(
-                                  offset: Offset(-30, -10),
-                                  child: MyButton(
-                                    elevation: 0,
-                                    onPressed: () {},
-                                    child: Icon(
-                                      Icons.camera_alt,
-                                      color: Get.theme.colorScheme.onSurface,
-                                      size: Get.width * 0.05,
-                                    ),
-                                    width: Get.width * 0.10,
-                                    height: Get.width * 0.10,
-                                    borderRadius: 50,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          SizedBox(
-                            height: 20,
-                          ),
-                        ],
-                      ),
                       MyTextFormField(
                         name: "",
                         fillColor: Theme.of(context).colorScheme.background,
-                        title: appLocalizations.activityNumber,
+                        title: appLocalizations.academicNumber,
                         isRequired: true,
                         keyboardType: TextInputType.number,
                         label: Text(
                           appLocalizations.enter(
                             appLocalizations.the(
-                              appLocalizations.activityNumber,
+                              appLocalizations.academicNumber,
+                            ),
+                          ),
+                        ),
+                        prefix: Icon(
+                          Icons.person_rounded,
+                        ),
+                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      MyTextFormField(
+                        name: "",
+                        fillColor: Theme.of(context).colorScheme.background,
+                        title: appLocalizations.name,
+                        isRequired: true,
+                        keyboardType: TextInputType.name,
+                        label: Text(
+                          appLocalizations.enter(
+                            appLocalizations.the(
+                              appLocalizations.name,
+                            ),
+                          ),
+                        ),
+                        prefix: Icon(
+                          Icons.person_rounded,
+                        ),
+                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      MyTextFormField(
+                        name: "",
+                        fillColor: Theme.of(context).colorScheme.background,
+                        title: appLocalizations.college,
+                        isRequired: true,
+                        label: Text(
+                          appLocalizations.enter(
+                            appLocalizations.the(
+                              appLocalizations.college,
                             ),
                           ),
                         ),
@@ -164,18 +152,17 @@ class ActvitiesSettings extends StatelessWidget {
                       MyTextFormField(
                         name: "",
                         fillColor: Theme.of(context).colorScheme.background,
-                        title: appLocalizations.activityTitle,
+                        title: appLocalizations.specialization,
                         isRequired: true,
-                        keyboardType: TextInputType.name,
                         label: Text(
                           appLocalizations.enter(
                             appLocalizations.the(
-                              appLocalizations.activityTitle,
+                              appLocalizations.specialization,
                             ),
                           ),
                         ),
                         prefix: Icon(
-                          FontAwesome.building_wheat_solid,
+                          Icons.account_tree_rounded,
                         ),
                       ),
                       SizedBox(
@@ -184,39 +171,17 @@ class ActvitiesSettings extends StatelessWidget {
                       MyTextFormField(
                         name: "",
                         fillColor: Theme.of(context).colorScheme.background,
-                        title: appLocalizations.activityText,
+                        title: appLocalizations.term,
                         isRequired: true,
                         label: Text(
                           appLocalizations.enter(
                             appLocalizations.the(
-                              appLocalizations.activityText,
+                              appLocalizations.term,
                             ),
                           ),
                         ),
                         prefix: Icon(
-                          FontAwesome.building_wheat_solid,
-                        ),
-                        maxLines: 5,
-                        maxLength: 300,
-                      ),
-                      SizedBox(
-                        height: 20,
-                      ),
-                      MyDateFormField(
-                        name: "",
-                        fillColor: Theme.of(context).colorScheme.background,
-                        title: appLocalizations.activityDate,
-                        isRequired: true,
-                        keyboardType: TextInputType.name,
-                        label: Text(
-                          appLocalizations.enter(
-                            appLocalizations.the(
-                              appLocalizations.activityDate,
-                            ),
-                          ),
-                        ),
-                        prefix: Icon(
-                          Icons.date_range_rounded,
+                          Icons.bubble_chart_rounded,
                         ),
                       ),
                       SizedBox(
@@ -277,8 +242,7 @@ class ActvitiesSettings extends StatelessWidget {
         },
       );
     }
-    
-    
+
     return ListView(
       children: [
         FadeInDown(
@@ -286,7 +250,7 @@ class ActvitiesSettings extends StatelessWidget {
           curve: Curves.fastOutSlowIn,
           duration: Duration(milliseconds: 500),
           child: BodyTitle(
-            title: appLocalizations.activites,
+            title: appLocalizations.students,
           ),
         ),
         Column(
@@ -297,11 +261,12 @@ class ActvitiesSettings extends StatelessWidget {
               curve: Curves.fastOutSlowIn,
               duration: Duration(milliseconds: 500),
               child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: Get.width * 0.037), // 15
+                padding:
+                    EdgeInsets.symmetric(horizontal: Get.width * 0.037), // 15
                 child: MyButton(
                   width: Get.width * 0.3,
                   onPressed: () {
-                   _activityAddEditDialog();
+                    _studentsAddEditDialog();
                   },
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -316,7 +281,7 @@ class ActvitiesSettings extends StatelessWidget {
                         ),
                       ),
                       Icon(
-                        Icons.add,
+                        Icons.person_add_alt_1_rounded,
                         color: Get.theme.colorScheme.onSurface,
                       ),
                     ],
@@ -326,13 +291,17 @@ class ActvitiesSettings extends StatelessWidget {
             ),
             FadeIn(
               child: MyTable(
+                isPaginatedData: true,
+                rowPerPagesNumber: 10,
                 enableSelectedColumn: true,
                 hasData: false,
                 isWaiting: false,
                 showHeader: true,
                 header: Center(
                   child: Text(
-                    appLocalizations.all(appLocalizations.activites),
+                    appLocalizations.all(
+                      appLocalizations.students,
+                    ),
                     style: TextStyle(
                       color: Theme.of(context).primaryColorLight,
                       fontSize: Get.width * 0.05,
@@ -343,31 +312,31 @@ class ActvitiesSettings extends StatelessWidget {
                 columns: [
                   {
                     ColumnData.name: "activityNumber",
-                    ColumnData.text: appLocalizations.activityNumber,
+                    ColumnData.text: appLocalizations.academicNumber,
                     ColumnData.width: 200,
                     ColumnData.canSort: true,
                   },
                   {
                     ColumnData.name: "activityImage",
-                    ColumnData.text: appLocalizations.activityImage,
+                    ColumnData.text: appLocalizations.name,
                     ColumnData.width: 250,
                     ColumnData.canSort: true,
                   },
                   {
                     ColumnData.name: "activityTitle",
-                    ColumnData.text: appLocalizations.activityTitle,
+                    ColumnData.text: appLocalizations.college,
                     ColumnData.width: 200,
                     ColumnData.canSort: true,
                   },
                   {
                     ColumnData.name: "activityText",
-                    ColumnData.text: appLocalizations.activityText,
-                    ColumnData.width: 400,
+                    ColumnData.text: appLocalizations.specialization,
+                    ColumnData.width: 200,
                     ColumnData.canSort: true,
                   },
                   {
                     ColumnData.name: "activityDate",
-                    ColumnData.text: appLocalizations.activityDate,
+                    ColumnData.text: appLocalizations.term,
                     ColumnData.width: 200,
                     ColumnData.canSort: true,
                   },
@@ -387,37 +356,27 @@ class ActvitiesSettings extends StatelessWidget {
                 rows: List.generate(100, (index) {
                   return {
                     "id": "${Random().nextInt(1000).toString()}",
-                    "activityNumber": MyDataCell(
+                    "studentsNumber": MyDataCell(
                       width: 200,
                       text: Random().nextInt(1000).toString(),
                     ),
-                    "activityImage": MyDataCell(
+                    "studentsImage": MyDataCell(
                       width: 250,
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(10),
-                        child: Image.asset(
-                          "assets/images/1.jpg",
-                          width: 200,
-                          height: 120,
-                          fit: BoxFit.cover,
-                        ),
-                      ),
+                      text: Random().nextInt(1000).toString(),
                     ),
-                    "activityTitle": MyDataCell(
+                    "studentsTitle": MyDataCell(
                       width: 200,
-                      text: "activity ${Random().nextInt(1000)}",
+                      text: "students ${Random().nextInt(1000)}",
                     ),
-                    "activityText": MyDataCell(
-                      width: 400,
-                      isLongText: true,
-                      text:
-                          "(optional) Widget keychild	            Widget	    Child Widget to animate duration	        Duration	Animation duration delay	            Duration	Delay before the animation from	            double	    Initial or final destination, if you want a slide or fade more striking animate	            boolean	    Change this property from false to true to start the animation (useful if you use setState, Bloc, Provider, Redux or any other state management system) infinite	        boolean	    Attention seekers can be run infinitely with this property spins	            double	    The number of spins that you want (some animations have this, ex: Spin, Roulette, PerfectSpin ) manualTrigger	    boolean	    if you're going to trigger the animation manually (required the controller property) controller	        Function	Function that exposes the controller (advanced use cases the majority don't need this) onFinish	        Function	Function that is called when the animation finished (With argument: forward or backward ) curve	            Curve	    You can change the curve animation of any Animated widget in order to customize it",
-                    ),
-                    "activityDate": MyDataCell(
+                    "studentsText": MyDataCell(
                       width: 200,
-                      text: "activity ${Random().nextInt(1000)}",
+                      text: "students ${Random().nextInt(1000)}"
                     ),
-                    "activityEdit": MyDataCell(
+                    "studentsDate": MyDataCell(
+                      width: 200,
+                      text: "students ${Random().nextInt(1000)}",
+                    ),
+                    "studentsEdit": MyDataCell(
                       width: 70,
                       alignment: Alignment.center,
                       child: MyButton(
@@ -430,7 +389,7 @@ class ActvitiesSettings extends StatelessWidget {
                         ),
                       ),
                     ),
-                    "activityDelete": MyDataCell(
+                    "studentsDelete": MyDataCell(
                       width: 70,
                       textColor: Get.theme.colorScheme.onSurface,
                       alignment: Alignment.center,
@@ -448,7 +407,7 @@ class ActvitiesSettings extends StatelessWidget {
                   };
                 }),
                 index: 1,
-                appLocalizations: appLocalizations!,
+                appLocalizations: appLocalizations,
               ),
             ),
           ],

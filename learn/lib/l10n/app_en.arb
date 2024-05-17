@@ -313,5 +313,10 @@
   "specializationNumber": "Specialization Number",
   "specializationName": "Specialization Name",
   "numberOfYears": "Number Of Years",
-  "specialty": "Specialty"
+  "specialty": "Specialty",
+  "studentsAffairs": "Students Affairs",
+  "students": "Students",
+  "specialization": "Specialization",
+  "term": "Term",
+  "student": "Student"
 }

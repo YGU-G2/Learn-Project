@@ -313,5 +313,10 @@
   "specializationNumber": "رقم التخصص",
   "specializationName": "اسم التخصص",
   "numberOfYears": "عددالسنوات",
-  "specialty": "تخصص"
+  "specialty": "تخصص",
+  "studentsAffairs": "شؤون الطلاب",
+  "students": "الطلاب",
+  "specialization": "التخصص",
+  "term": "الترم",
+  "student": "طالب"
 }
