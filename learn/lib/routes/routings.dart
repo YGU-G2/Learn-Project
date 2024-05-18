@@ -88,8 +88,8 @@ class Routings {
       transitionDuration: Duration(milliseconds: 1000),
       children: [
         GetPage(
-          name: SingleChatScreen.id,
-          page: () => SingleChatScreen(),
+          name: ChatScreen.id,
+          page: () => ChatScreen(),
           title: "الدردشة الفردية",
           transition: Transition.cupertinoDialog,
           transitionDuration: Duration(milliseconds: 1000),
