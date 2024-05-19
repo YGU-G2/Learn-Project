@@ -7,14 +7,18 @@ import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:get/get.dart';
 import 'package:learn/controller/language_controller.dart';
+import 'package:learn/controller/login_logout/login_controller.dart';
 import 'package:learn/views/my_scaffold.dart';
 import 'package:learn/widgets/body_title.dart';
+import 'package:learn/widgets/loading.dart';
 import 'package:learn/widgets/my_button.dart';
 import 'package:learn/widgets/form/my_password_form_field.dart';
 import 'package:learn/widgets/form/my_text_form_field.dart';
 import 'package:wave/config.dart';
 import 'package:wave/wave.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
+final loginFormKey = GlobalKey<FormBuilderState>();
 
 class Login extends StatelessWidget {
   static String id = "/login";
@@ -25,7 +29,6 @@ class Login extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final loginFormKey = GlobalKey<FormBuilderState>();
     final appLocalizations = AppLocalizations.of(context);
 
     void onLoginFieldsChanges(String name) {
@@ -34,17 +37,17 @@ class Login extends StatelessWidget {
       );
     }
 
-    Widget forgotThePassword = TextButton(
-      onPressed: () {},
-      child: Text(
-        appLocalizations!.forgotThePassword,
-        style: TextStyle(
-          color: Theme.of(context).colorScheme.onPrimary,
-        ),
-      ),
-    );
+    void handleLogin() {
+      if (loginFormKey.currentState!.saveAndValidate()) {
+        LoginController.login(
+          loginFormKey.currentState!.value['loginAcademicNumber'],
+          loginFormKey.currentState!.value['loginPassword'],
+        );
+      }
+    }
+
     return MyScaffold(
-      appLocalizations: appLocalizations,
+      appLocalizations: appLocalizations!,
       useAppBar: false,
       bodyBackground: Theme.of(context).colorScheme.background,
       body: SizedBox(
@@ -168,13 +171,13 @@ class Login extends StatelessWidget {
                   )
                 ],
               ),
-              FormBuilder(
-                key: loginFormKey,
-                child: SizedBox(
-                  width: MediaQuery.of(context).size.width - 50,
-                  child: Card(
-                    child: Padding(
-                      padding: const EdgeInsets.all(10),
+              SizedBox(
+                width: MediaQuery.of(context).size.width - 50,
+                child: Card(
+                  child: Padding(
+                    padding: const EdgeInsets.all(10),
+                    child: FormBuilder(
+                      key: loginFormKey,
                       child: Column(
                         children: [
                           FadeInDown(
@@ -196,7 +199,7 @@ class Login extends StatelessWidget {
                               onLoginFieldsChanges(
                                 "loginAcademicNumber",
                               );
-                            },                            
+                            },
                             title: appLocalizations.academicNumber,
                             isRequired: true,
                             maxLength: 15,
@@ -211,7 +214,7 @@ class Login extends StatelessWidget {
                             validators: [
                               FormBuilderValidators.required(
                                 errorText: appLocalizations.requiredField,
-                              ),                              
+                              ),
                             ],
                           ),
                           MyPasswordFormField(
@@ -236,6 +239,17 @@ class Login extends StatelessWidget {
                               ),
                             ),
                             keyboardType: TextInputType.visiblePassword,
+                            validators: [
+                              FormBuilderValidators.required(
+                                errorText: appLocalizations.requiredField,
+                              ),
+                              FormBuilderValidators.minLength(
+                                8,
+                                errorText: appLocalizations.minLength(
+                                  8,
+                                ),
+                              ),
+                            ],
                           ),
                           Align(
                             alignment:
@@ -245,20 +259,22 @@ class Login extends StatelessWidget {
                             child: Padding(
                               padding:
                                   const EdgeInsets.symmetric(horizontal: 15),
-                              child: LanguageController.getCurrentLanguage() ==
-                                      "ar"
-                                  ? FadeInRight(
-                                      delay: Duration(milliseconds: 1500),
-                                      curve: Curves.fastOutSlowIn,
-                                      duration: Duration(milliseconds: 500),
-                                      child: forgotThePassword,
-                                    )
-                                  : FadeInLeft(
-                                      delay: Duration(milliseconds: 1500),
-                                      curve: Curves.fastOutSlowIn,
-                                      duration: Duration(milliseconds: 500),
-                                      child: forgotThePassword,
+                              child: FadeInRight(
+                                delay: Duration(milliseconds: 1500),
+                                curve: Curves.fastOutSlowIn,
+                                duration: Duration(milliseconds: 500),
+                                child: TextButton(
+                                  onPressed: () {},
+                                  child: Text(
+                                    appLocalizations.forgotThePassword,
+                                    style: TextStyle(
+                                      color: Theme.of(context)
+                                          .colorScheme
+                                          .onPrimary,
                                     ),
+                                  ),
+                                ),
+                              ),
                             ),
                           ),
                           FlipInY(
@@ -268,16 +284,23 @@ class Login extends StatelessWidget {
                             child: Padding(
                               padding: EdgeInsets.symmetric(
                                   vertical: Get.width * 0.025),
-                              child: MyButton(
-                                onPressed: () {},
-                                child: Text(
-                                  appLocalizations.login,
-                                  style: TextStyle(
-                                    color:
-                                        Theme.of(context).colorScheme.onSurface,
-                                    fontSize: 16.0,
-                                    fontWeight: FontWeight.bold,
-                                  ),
+                              child: Obx(
+                                () => MyButton(
+                                  onPressed: () {
+                                    handleLogin();
+                                  },
+                                  child: LoginController.isLoginLoading.value
+                                      ? Loading.getCubeGrid()
+                                      : Text(
+                                          appLocalizations.login,
+                                          style: TextStyle(
+                                            color: Theme.of(context)
+                                                .colorScheme
+                                                .onSurface,
+                                            fontSize: 16.0,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
                                 ),
                               ),
                             ),

@@ -12,7 +12,9 @@ import 'package:learn/screens/home/home.dart';
 import 'package:learn/screens/home/news_main_page_datiles.dart';
 import 'package:learn/screens/lectuers/main_lectuers.dart';
 import 'package:learn/screens/login.dart';
+import 'package:learn/screens/settings/account_settings.dart';
 import 'package:learn/screens/settings/main_settings.dart';
+import 'package:learn/screens/settings/profile_settings.dart';
 import 'package:learn/screens/settings/themes_main_settings.dart';
 import 'package:learn/screens/subjects/main_subjects_screen.dart';
 import 'package:learn/screens/subjects/subjects_info.dart';
@@ -155,6 +157,22 @@ class Routings {
           title: "الأعدادات - السمات",
           transition: Transition.cupertinoDialog,
           transitionDuration: Duration(milliseconds: 1000),
+        ),
+        GetPage(
+          name: AccountSettings.id,
+          page: () => AccountSettings(),
+          title: "الأعدادات - الحساب",
+          transition: Transition.cupertinoDialog,
+          transitionDuration: Duration(milliseconds: 1000),
+          children: [
+            GetPage(
+              name: ProfileSettings.id,
+              page: () => ProfileSettings(),
+              title: "الأعدادات - الملف الشخصي",
+              transition: Transition.cupertinoDialog,
+              transitionDuration: Duration(milliseconds: 1000),
+            ),
+          ],
         ),
       ],
     ),

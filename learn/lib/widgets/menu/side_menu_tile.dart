@@ -53,6 +53,7 @@ class SideMenuTile extends StatelessWidget {
                         fontWeight: FontWeight.w600,
                       ),
                     ),
+                    trailing: mune.trailing,
                   ),
                 ),
               ),

@@ -44,7 +44,7 @@ class MainDashboardScreen extends StatelessWidget {
                   icon: Icons.account_balance_rounded,
                   onPressed: () {
                     Get.toNamed(
-                      "${MainDashboardScreen.id}/${UniversitySettings.id}",
+                      "${MainDashboardScreen.id}${UniversitySettings.id}",
                     );
                   },
                 ),
@@ -58,7 +58,7 @@ class MainDashboardScreen extends StatelessWidget {
                   icon: Icons.people_alt_rounded,
                   onPressed: () {
                     Get.toNamed(
-                      "${MainDashboardScreen.id}/${AcademicAffairs.id}",
+                      "${MainDashboardScreen.id}${AcademicAffairs.id}",
                     );
                   },
                 ),
@@ -72,7 +72,7 @@ class MainDashboardScreen extends StatelessWidget {
                   icon: Icons.groups_3_rounded,
                   onPressed: () {
                     Get.toNamed(
-                      "${MainDashboardScreen.id}/${StudentsAffairs.id}",
+                      "${MainDashboardScreen.id}${StudentsAffairs.id}",
                     );
                   },
                 ),

@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:learn/screens/home/home.dart';
 import 'package:learn/screens/home/news_main_page_datiles.dart';
 import 'package:learn/views/my_footer.dart';
+import 'package:learn/widgets/internet_status.dart';
 import 'package:learn/widgets/list_tile_card.dart';
 import '../../widgets/body_title.dart';
 
@@ -18,31 +19,49 @@ class NewsMainPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView(
+    return Stack(
       children: [
-        FadeInDown(
-          delay: Duration(milliseconds: 300),
-          curve: Curves.fastOutSlowIn,
-          duration: Duration(milliseconds: 500),
-          child: BodyTitle(
-            title: appLocalizations.all(appLocalizations.news),
+        Padding(
+          padding: EdgeInsets.only(
+            top: Get.height * 0.11, // 95
+            bottom: 80,
+          ),
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                FadeInDown(
+                  delay: Duration(milliseconds: 300),
+                  curve: Curves.fastOutSlowIn,
+                  duration: Duration(milliseconds: 500),
+                  child: BodyTitle(
+                    title: appLocalizations.all(appLocalizations.news),
+                  ),
+                ),
+                ListTileCard(
+                  title: "اخبار المهندسين",
+                  press: () => Get.toNamed("${Home.id}/${NewsMainPageDatiles.id}"),
+                ),
+                ListTileCard(
+                  title: "اخبار الدكاترة",
+                  press: () => Get.toNamed("${Home.id}/${NewsMainPageDatiles.id}"),
+                ),
+                ListTileCard(
+                  title: "اخبار المحاسبين",
+                  press: () => Get.toNamed("${Home.id}/${NewsMainPageDatiles.id}"),
+                ),
+                MyFooter(
+                  appLocalizations: appLocalizations,
+                ),
+              ],
+            ),
           ),
         ),
-        ListTileCard(
-          title: "اخبار المهندسين",
-          press: () => Get.toNamed("${Home.id}/${NewsMainPageDatiles.id}"),
-        ),
-        ListTileCard(
-          title: "اخبار الدكاترة",
-          press: () => Get.toNamed("${Home.id}/${NewsMainPageDatiles.id}"),
-        ),
-        ListTileCard(
-          title: "اخبار المحاسبين",
-          press: () => Get.toNamed("${Home.id}/${NewsMainPageDatiles.id}"),
-        ),
-        MyFooter(
-          appLocalizations: appLocalizations,
-        ),
+        Positioned(
+          bottom: 80,
+          child: InternetStatus(
+            appLocalizations: appLocalizations,
+          ),
+        )
       ],
     );
   }

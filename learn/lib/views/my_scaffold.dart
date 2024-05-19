@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:learn/controller/language_controller.dart';
+import 'package:learn/controller/login_logout/login_controller.dart';
 import 'package:learn/controller/main_controller.dart';
 import 'package:learn/screens/chats/main_chat_screen.dart';
 import 'package:learn/screens/chats/chat_screen.dart';
@@ -126,57 +127,63 @@ class _MyScaffoldState extends State<MyScaffold>
         icon: Icons.home,
         key: [
           Home.id,
-          "${Home.id}/${CollageMainPageDatiles.id}",
-          "${Home.id}/${NewsMainPageDatiles.id}",
-          "${Home.id}/${ActivitesMainPageDatiles.id}",
+          "${Home.id}${CollageMainPageDatiles.id}",
+          "${Home.id}${NewsMainPageDatiles.id}",
+          "${Home.id}${ActivitesMainPageDatiles.id}",
         ],
       ),
-      MenuItems(
-        title: widget.appLocalizations.dashboard,
-        icon: Icons.dashboard_rounded,
-        key: [
-          MainDashboardScreen.id,
-          "${MainDashboardScreen.id}/${UniversitySettings.id}",
-          "${MainDashboardScreen.id}/${AcademicAffairs.id}",
-          "${MainDashboardScreen.id}/${StudentsAffairs.id}",
-        ],
-      ),
-      MenuItems(
-        title: widget.appLocalizations.chat,
-        icon: CupertinoIcons.chat_bubble_2_fill,
-        key: [
-          MainChatScreen.id,
-          "${MainChatScreen.id}/${ChatScreen.id}",
-        ],
-      ),
-      MenuItems(
-        title: widget.appLocalizations.lectuers,
-        icon: Icons.video_library_rounded,
-        key: [
-          MainLectuers.id,
-        ],
-      ),
-      MenuItems(
-        title: widget.appLocalizations.subjects,
-        icon: Icons.collections_bookmark_rounded,
-        key: [
-          MainSubjectsScreen.id,
-          "${MainSubjectsScreen.id}/${SubjectsInfo.id}",
-          "${MainSubjectsScreen.id}/${SubjectsInfo.id}/${SubjectsMediaLinksDocs.id}",
-        ],
-      ),
-      MenuItems(
-        title: widget.appLocalizations.exams,
-        icon: Icons.assignment_rounded,
-        key: [
-          MainExamsScreen.id,
-        ],
-      ),
-      MenuItems(
-        title: widget.appLocalizations.login,
-        icon: Icons.login_rounded,
-        key: [Login.id],
-      ),
+      if (LoginController.isLogined.value)
+        MenuItems(
+          title: widget.appLocalizations.dashboard,
+          icon: Icons.dashboard_rounded,
+          key: [
+            MainDashboardScreen.id,
+            "${MainDashboardScreen.id}${UniversitySettings.id}",
+            "${MainDashboardScreen.id}${AcademicAffairs.id}",
+            "${MainDashboardScreen.id}${StudentsAffairs.id}",
+          ],
+        ),
+      if (LoginController.isLogined.value)
+        MenuItems(
+          title: widget.appLocalizations.chat,
+          icon: CupertinoIcons.chat_bubble_2_fill,
+          key: [
+            MainChatScreen.id,
+            "${MainChatScreen.id}${ChatScreen.id}",
+          ],
+        ),
+      if (LoginController.isLogined.value)
+        MenuItems(
+          title: widget.appLocalizations.lectuers,
+          icon: Icons.video_library_rounded,
+          key: [
+            MainLectuers.id,
+          ],
+        ),
+      if (LoginController.isLogined.value)
+        MenuItems(
+          title: widget.appLocalizations.subjects,
+          icon: Icons.collections_bookmark_rounded,
+          key: [
+            MainSubjectsScreen.id,
+            "${MainSubjectsScreen.id}${SubjectsInfo.id}",
+            "${MainSubjectsScreen.id}${SubjectsInfo.id}${SubjectsMediaLinksDocs.id}",
+          ],
+        ),
+      if (LoginController.isLogined.value)
+        MenuItems(
+          title: widget.appLocalizations.exams,
+          icon: Icons.assignment_rounded,
+          key: [
+            MainExamsScreen.id,
+          ],
+        ),
+      if (!LoginController.isLogined.value)
+        MenuItems(
+          title: widget.appLocalizations.login,
+          icon: Icons.login_rounded,
+          key: [Login.id],
+        ),
     ];
     return Directionality(
       textDirection: LanguageController.currentLanguage == "system"
@@ -224,6 +231,7 @@ class _MyScaffoldState extends State<MyScaffold>
                           : 0,
                   height: MediaQuery.of(context).size.height,
                   child: SideMenu(
+                    appLocalizations: widget.appLocalizations,
                     MenuItemsList: [
                       ...sideMenu.map(
                         (menu) => SideMenuTile(

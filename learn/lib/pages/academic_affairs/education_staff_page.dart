@@ -13,6 +13,7 @@ import 'package:learn/controller/language_controller.dart';
 import 'package:learn/controller/table_controller.dart';
 import 'package:learn/models/education_staff.dart';
 import 'package:learn/models/permisions.dart';
+import 'package:learn/utils/my_alert_dialog.dart';
 import 'package:learn/views/my_table/my_data_cell.dart';
 import 'package:learn/views/my_table/my_data_column.dart';
 import 'package:learn/views/my_table/my_table.dart';
@@ -68,6 +69,10 @@ class EducationStaffPage extends StatelessWidget {
             educationStaffPermisions: educationStaffFormKey
                 .currentState!.value['educationStaffPermisions'],
             educationStaffPermisionName: permisions.permisionName,
+            educationStaffAbout: '',
+            educationStaffEmail: '',
+            educationStaffImage: '',
+            isEducationStaffLogined: false,
           ),
         );
       }
@@ -148,6 +153,12 @@ class EducationStaffPage extends StatelessWidget {
             educationStaffPermisions: educationStaffFormKey
                 .currentState!.value['educationStaffPermisions'],
             educationStaffPermisionName: permisions.permisionName,
+            educationStaffAbout: editEducationStaff.educationStaffAbout,
+            educationStaffEmail: editEducationStaff.educationStaffEmail,
+            educationStaffImage: editEducationStaff.educationStaffImage,
+            educationStaffSocialMedia:
+                editEducationStaff.educationStaffSocialMedia,
+            isEducationStaffLogined: editEducationStaff.isEducationStaffLogined,
           ),
         );
       }
@@ -204,96 +215,17 @@ class EducationStaffPage extends StatelessWidget {
 
     void _handleDeleteEducationStaff(
         QueryDocumentSnapshot<Map<String, dynamic>> document) {
-      showDialog(
-        context: context,
-        builder: (context) {
-          return Directionality(
-            textDirection: LanguageController.getCurrentLanguage() == "ar"
-                ? TextDirection.rtl
-                : TextDirection.ltr,
-            child: AlertDialog(
-              buttonPadding: EdgeInsets.zero,
-              actionsPadding: EdgeInsets.zero,
-              backgroundColor: Get.theme.primaryColorDark,
-              shadowColor: Get.theme.colorScheme.shadow,
-              contentPadding: EdgeInsets.zero,
-              titlePadding: EdgeInsets.zero,
-              insetPadding: EdgeInsets.symmetric(
-                horizontal: Get.width * 0.05,
-                vertical: Get.height * 0.05,
-              ),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10),
-                side: BorderSide(
-                  color: Get.theme.colorScheme.onBackground,
-                ),
-              ),
-              title: Padding(
-                padding: EdgeInsets.all(
-                  Get.width * 0.037,
-                ),
-                child: Text(
-                  appLocalizations!.verificationMessage,
-                  style: TextStyle(
-                    color: Theme.of(context).primaryColorLight,
-                    fontSize: Get.width * 0.045,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ),
-              content: SizedBox(
-                width: Get.width,
-                child: Padding(
-                  padding: EdgeInsets.only(
-                    right: Get.width * 0.05,
-                    left: Get.width * 0.05,
-                    bottom: Get.width * 0.05,
-                  ),
-                  child: Text(
-                    appLocalizations!.deleteSure(
-                      document['educationStaffName'],
-                    ),
-                    style: TextStyle(
-                      color: Theme.of(context).colorScheme.onPrimary,
-                      fontSize: Get.width * 0.040,
-                    ),
-                  ),
-                ),
-              ),
-              actions: [
-                Padding(
-                  padding: EdgeInsets.all(
-                    Get.width * 0.025,
-                  ), // 10
-                  child: TextButton(
-                    onPressed: () {
-                      EducationStaffController.educationStaffWaitingBtn.value =
-                          document.id;
-                      EducationStaffController.deleteEducationStaff(
-                        educationStaffId: document.id,
-                      );
-                      Get.back();
-                    },
-                    child: Text(
-                      appLocalizations!.yes,
-                    ),
-                  ),
-                ),
-                Padding(
-                  padding: EdgeInsets.all(
-                    Get.width * 0.025,
-                  ), // 10
-                  child: TextButton(
-                    onPressed: () {
-                      Get.back();
-                    },
-                    child: Text(
-                      appLocalizations!.no,
-                    ),
-                  ),
-                ),
-              ],
-            ),
+      MyAlertDialog.showMyAlertDialog(
+        appLocalizations: appLocalizations!,
+        icon: Icons.warning_amber_rounded,
+        whoDelete: document['educationStaffName'],
+        iconColor: Colors.red,
+        title: appLocalizations!.warningMessage,
+        onYesBtnPressed: () {
+          Get.back();
+          EducationStaffController.educationStaffWaitingBtn.value = document.id;
+          EducationStaffController.deleteEducationStaff(
+            educationStaffId: document.id,
           );
         },
       );
@@ -301,94 +233,16 @@ class EducationStaffPage extends StatelessWidget {
 
     void _handleDeletePermision(
         QueryDocumentSnapshot<Map<String, dynamic>> document) {
-      showDialog(
-        context: context,
-        builder: (context) {
-          return Directionality(
-            textDirection: LanguageController.getCurrentLanguage() == "ar"
-                ? TextDirection.rtl
-                : TextDirection.ltr,
-            child: AlertDialog(
-              buttonPadding: EdgeInsets.zero,
-              actionsPadding: EdgeInsets.zero,
-              backgroundColor: Get.theme.primaryColorDark,
-              shadowColor: Get.theme.colorScheme.shadow,
-              contentPadding: EdgeInsets.zero,
-              titlePadding: EdgeInsets.zero,
-              insetPadding: EdgeInsets.symmetric(
-                horizontal: Get.width * 0.05,
-                vertical: Get.height * 0.05,
-              ),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10),
-                side: BorderSide(
-                  color: Get.theme.colorScheme.onBackground,
-                ),
-              ),
-              title: Padding(
-                padding: EdgeInsets.all(
-                  Get.width * 0.037,
-                ),
-                child: Text(
-                  appLocalizations!.verificationMessage,
-                  style: TextStyle(
-                    color: Theme.of(context).primaryColorLight,
-                    fontSize: Get.width * 0.045,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ),
-              content: SizedBox(
-                width: Get.width,
-                child: Padding(
-                  padding: EdgeInsets.only(
-                    right: Get.width * 0.05,
-                    left: Get.width * 0.05,
-                    bottom: Get.width * 0.05,
-                  ),
-                  child: Text(
-                    appLocalizations!.deleteSure(
-                      document['permisionName'],
-                    ),
-                    style: TextStyle(
-                      color: Theme.of(context).colorScheme.onPrimary,
-                      fontSize: Get.width * 0.040,
-                    ),
-                  ),
-                ),
-              ),
-              actions: [
-                Padding(
-                  padding: EdgeInsets.all(
-                    Get.width * 0.025,
-                  ), // 10
-                  child: TextButton(
-                    onPressed: () {
-                      PermisionsController.deletePermisions(
-                        permisionId: document.id,
-                      );
-                      Get.back();
-                    },
-                    child: Text(
-                      appLocalizations!.yes,
-                    ),
-                  ),
-                ),
-                Padding(
-                  padding: EdgeInsets.all(
-                    Get.width * 0.025,
-                  ), // 10
-                  child: TextButton(
-                    onPressed: () {
-                      Get.back();
-                    },
-                    child: Text(
-                      appLocalizations!.no,
-                    ),
-                  ),
-                ),
-              ],
-            ),
+      MyAlertDialog.showMyAlertDialog(
+        appLocalizations: appLocalizations!,
+        icon: Icons.warning_amber_rounded,
+        whoDelete: document['permisionName'],
+        iconColor: Colors.red,
+        title: appLocalizations!.warningMessage,
+        onYesBtnPressed: () {
+          Get.back();
+          PermisionsController.deletePermisions(
+            permisionId: document.id,
           );
         },
       );
@@ -1358,7 +1212,7 @@ class EducationStaffPage extends StatelessWidget {
                                 ? null
                                 : educationStaff!.educationStaffBirthDate,
                             title: appLocalizations!.birthDate,
-                            keyboardType: TextInputType.number,
+                            keyboardType: TextInputType.datetime,
                             isRequired: false,
                             label: Text(
                               appLocalizations!.enter(
@@ -1852,35 +1706,6 @@ class EducationStaffPage extends StatelessWidget {
       EducationStaffController.isEducationStaffOperationWaiting.value = false;
     }
 
-    String _getEducationStaffAcademicDegree(
-        String educationStaffAcademicDegree) {
-      if (educationStaffAcademicDegree == "Professor") {
-        return appLocalizations!.professor;
-      } else if (educationStaffAcademicDegree == "Doctorate") {
-        return appLocalizations!.doctorate;
-      } else {
-        return appLocalizations!.bachelor;
-      }
-    }
-
-    String _getEducationStaffGender(String educationStaffGender) {
-      if (educationStaffGender == "male") {
-        return appLocalizations!.male;
-      } else {
-        return appLocalizations!.female;
-      }
-    }
-
-    String _getEducationStaffJobTitle(String educationStaffJobTitle) {
-      if (educationStaffJobTitle == "Professor") {
-        return appLocalizations!.professor;
-      } else if (educationStaffJobTitle == "Teacher") {
-        return appLocalizations!.teacher;
-      } else {
-        return appLocalizations!.doctor;
-      }
-    }
-
     return ListView(
       children: [
         FadeInDown(
@@ -1987,111 +1812,26 @@ class EducationStaffPage extends StatelessWidget {
                   showHeader: true,
                   deleteAllBtn: TextButton(
                     onPressed: () {
-                      showDialog(
-                        context: context,
-                        builder: (context) {
-                          return Directionality(
-                            textDirection:
-                                LanguageController.getCurrentLanguage() == "ar"
-                                    ? TextDirection.rtl
-                                    : TextDirection.ltr,
-                            child: AlertDialog(
-                              buttonPadding: EdgeInsets.zero,
-                              actionsPadding: EdgeInsets.zero,
-                              backgroundColor: Get.theme.primaryColorDark,
-                              shadowColor: Get.theme.colorScheme.shadow,
-                              contentPadding: EdgeInsets.zero,
-                              titlePadding: EdgeInsets.zero,
-                              insetPadding: EdgeInsets.symmetric(
-                                horizontal: Get.width * 0.05,
-                                vertical: Get.height * 0.05,
-                              ),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10),
-                                side: BorderSide(
-                                  color: Get.theme.colorScheme.onBackground,
-                                ),
-                              ),
-                              title: Padding(
-                                padding: EdgeInsets.only(
-                                  top: Get.width * 0.037,
-                                  right: Get.width * 0.037,
-                                  left: Get.width * 0.037,
-                                ),
-                                child: Text(
-                                  appLocalizations!.verificationMessage,
-                                  style: TextStyle(
-                                    color: Theme.of(context).primaryColorLight,
-                                    fontSize: Get.width * 0.045,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                              ),
-                              content: SizedBox(
-                                width: Get.width,
-                                child: Padding(
-                                  padding: EdgeInsets.only(
-                                    right: Get.width * 0.05,
-                                    left: Get.width * 0.05,
-                                    bottom: Get.width * 0.05,
-                                  ),
-                                  child: Text(
-                                    appLocalizations!.deleteSure(
-                                      "${tableController.getSelectedCount(1)} ${appLocalizations!.ofRows}",
-                                    ),
-                                    style: TextStyle(
-                                      color: Theme.of(context)
-                                          .colorScheme
-                                          .onPrimary,
-                                      fontSize: Get.width * 0.040,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              actions: [
-                                Padding(
-                                  padding: EdgeInsets.all(
-                                    Get.width * 0.025,
-                                  ), // 10
-                                  child: TextButton(
-                                    onPressed: () {
-                                      List<String> educationStaffIds = [];
-                                      for (var i = 0;
-                                          i < tableController.getRowsLength(1);
-                                          i++) {
-                                        if (tableController.getRow(1)[i]
-                                            ['isSelected']) {
-                                          educationStaffIds.add(
-                                            tableController.getRow(1)[i]['id'],
-                                          );
-                                        }
-                                      }
-                                      EducationStaffController
-                                          .deleteAllEducationStaff(
-                                        educationStaffIds: educationStaffIds,
-                                      );
-                                      Get.back();
-                                    },
-                                    child: Text(
-                                      appLocalizations!.yes,
-                                    ),
-                                  ),
-                                ),
-                                Padding(
-                                  padding: EdgeInsets.all(
-                                    Get.width * 0.025,
-                                  ), // 10
-                                  child: TextButton(
-                                    onPressed: () {
-                                      Get.back();
-                                    },
-                                    child: Text(
-                                      appLocalizations!.no,
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
+                      MyAlertDialog.showMyAlertDialog(
+                        appLocalizations: appLocalizations!,
+                        icon: Icons.warning_amber_rounded,
+                        whoDelete: "${tableController.getSelectedCount(1)} ${appLocalizations!.ofRows}",
+                        iconColor: Colors.red,
+                        title: appLocalizations!.warningMessage,
+                        onYesBtnPressed: () {
+                          Get.back();
+                          List<String> educationStaffIds = [];
+                          for (var i = 0;
+                              i < tableController.getRowsLength(1);
+                              i++) {
+                            if (tableController.getRow(1)[i]['isSelected']) {
+                              educationStaffIds.add(
+                                tableController.getRow(1)[i]['id'],
+                              );
+                            }
+                          }
+                          EducationStaffController.deleteAllEducationStaff(
+                            educationStaffIds: educationStaffIds,
                           );
                         },
                       );
@@ -2190,18 +1930,27 @@ class EducationStaffPage extends StatelessWidget {
                                 text: document['educationStaffName'],
                               ),
                               "educationStaffAcademicDegree": MyDataCell(
-                                text: _getEducationStaffAcademicDegree(
-                                  document['educationStaffAcademicDegree'],
+                                text: EducationStaffController
+                                    .getEducationStaffAcademicDegree(
+                                  educationStaffAcademicDegree:
+                                      document['educationStaffAcademicDegree'],
+                                  appLocalizations: appLocalizations!,
                                 ),
                               ),
                               "educationStaffGender": MyDataCell(
-                                text: _getEducationStaffGender(
-                                  document['educationStaffGender'],
+                                text: EducationStaffController
+                                    .getEducationStaffGender(
+                                  educationStaffGender:
+                                      document['educationStaffGender'],
+                                  appLocalizations: appLocalizations!,
                                 ),
                               ),
                               "educationStaffJobTitle": MyDataCell(
-                                text: _getEducationStaffJobTitle(
-                                  document['educationStaffJobTitle'],
+                                text: EducationStaffController
+                                    .getEducationStaffJobTitle(
+                                  educationStaffJobTitle:
+                                      document['educationStaffJobTitle'],
+                                  appLocalizations: appLocalizations!,
                                 ),
                               ),
                               "educationStaffBirthDate": MyDataCell(
