@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:learn/pages/academic_affairs/education_staff_page.dart';
+import 'package:learn/pages/academic_affairs/specialties_page.dart';
 import 'package:learn/views/my_scaffold.dart';
 import 'package:learn/widgets/body_title.dart';
 
@@ -22,11 +23,18 @@ class AcademicAffairs extends StatelessWidget {
         EducationStaffPage(
           appLocalizations: appLocalizations,
         ),
+        SpecialtiesPage(
+          appLocalizations: appLocalizations,
+        ),
       ],
       bottomNavigationBarItems: [
         [
           appLocalizations.educationStaff,
           Icons.school_rounded,
+        ],
+        [
+          appLocalizations.specialties,
+          Icons.account_tree_rounded,
         ],
       ],
     );
