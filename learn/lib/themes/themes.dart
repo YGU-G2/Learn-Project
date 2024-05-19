@@ -47,10 +47,10 @@ class Themes {
             : const Color.fromARGB(127, 150, 150, 150),
         // نوع الإضائة
         brightness: isDark ? Brightness.dark : Brightness.light,
-        surface: Color(0xff111111),
+        surface: Color(0xff222222),
         surfaceTint: Colors.white,
         onSurface: (colorNumber == 1 || colorNumber == 3 || colorNumber == 5)
-            ? Color(0xff111111)
+            ? Color(0xff222222)
             : Colors.white,
         // الالوان الفرعية 1
         secondary: (colorNumber == 1)
@@ -101,14 +101,14 @@ class Themes {
                         ? const Color(0xffffc266)
                         : const Color(0xffff6666),
       ),
-      primaryColorDark: isDark ? Color(0xff111111) : Colors.white,
-      primaryColorLight: isDark ? Colors.white : Color(0xff111111),
+      primaryColorDark: isDark ? Color(0xff222222) : Colors.white,
+      primaryColorLight: isDark ? Colors.white : Color(0xff222222),
       iconTheme: const IconThemeData(
         color: Colors.grey,
       ),
       dividerColor: isDark ? const Color(0xFF999999) : const Color(0xFF666666),
       cardTheme: CardTheme(
-        color: isDark ? Color(0xff111111) : Colors.white,
+        color: isDark ? Color(0xff222222) : Colors.white,
         elevation: 10,
         shadowColor: isDark
             ? const Color.fromARGB(127, 0, 0, 0)
@@ -123,9 +123,9 @@ class Themes {
         ),
       ),
       datePickerTheme: DatePickerThemeData(        
-        backgroundColor: isDark ? Color(0xff111111) : Colors.white,
+        backgroundColor: isDark ? Color(0xff222222) : Colors.white,
         dayForegroundColor: MaterialStateProperty.all(
-          isDark ? Colors.white : Color(0xff111111),
+          isDark ? Colors.white : Color(0xff222222),
         ),
         dayOverlayColor: MaterialStateProperty.all(
           (colorNumber == 1)
@@ -152,13 +152,13 @@ class Themes {
                         : const Color(0xff52e5be),
         headerForegroundColor:
             (colorNumber == 1 || colorNumber == 3 || colorNumber == 5)
-                ? Color(0xff111111)
+                ? Color(0xff222222)
                 : Colors.white,
         shadowColor: isDark
             ? const Color.fromARGB(127, 0, 0, 0)
             : const Color.fromARGB(127, 255, 255, 255),
         todayBackgroundColor: MaterialStateProperty.all(
-          isDark ? Color(0xff111111) : Colors.white,
+          isDark ? Color(0xff222222) : Colors.white,
         ),
         todayBorder: BorderSide(
           color: (colorNumber == 1)
@@ -190,7 +190,7 @@ class Themes {
           Colors.transparent,
         ),
         yearForegroundColor: MaterialStateProperty.all(
-          isDark ? Colors.white : Color(0xff111111),
+          isDark ? Colors.white : Color(0xff222222),
         ),
         yearOverlayColor: MaterialStateProperty.all(
           (colorNumber == 1)
@@ -205,8 +205,8 @@ class Themes {
         ),
       ),
       timePickerTheme: TimePickerThemeData(
-        backgroundColor: isDark ? Color(0xff111111) : Colors.white,
-        dayPeriodTextColor: isDark ? Colors.white : Color(0xff111111),
+        backgroundColor: isDark ? Color(0xff222222) : Colors.white,
+        dayPeriodTextColor: isDark ? Colors.white : Color(0xff222222),
         dialBackgroundColor: colorNumber == 1
               ? isDark
                   ? const Color(0xff3d2828)
@@ -226,10 +226,10 @@ class Themes {
                           : isDark
                               ? const Color(0xff253531)
                               : const Color(0xFFf3fcfa),
-        dialTextColor: isDark ? Colors.white : Color(0xff111111),
+        dialTextColor: isDark ? Colors.white : Color(0xff222222),
         elevation: 10,
-        entryModeIconColor: isDark ? Colors.white : Color(0xff111111),
-        hourMinuteTextColor: isDark ? Colors.white : Color(0xff111111),
+        entryModeIconColor: isDark ? Colors.white : Color(0xff222222),
+        hourMinuteTextColor: isDark ? Colors.white : Color(0xff222222),
       )
     );
   }

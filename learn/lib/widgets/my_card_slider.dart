@@ -14,7 +14,7 @@ class MyCardSlider extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       width: MediaQuery.of(context).size.width,
       child: CarouselSlider(
         options: CarouselOptions(
@@ -27,16 +27,19 @@ class MyCardSlider extends StatelessWidget {
           Card(
             child: Padding(
               padding: EdgeInsets.all(Get.width * 0.020), // 8
-              child: SingleChildScrollView(
-                physics: NeverScrollableScrollPhysics(),
-                child: Column(
-                  children: [
-                    ClipRRect(
+              child: Column(
+                children: [
+                  Expanded(
+                    flex: 10,
+                    child: ClipRRect(
                       borderRadius: BorderRadius.circular(10),
                       child: Image.asset("assets/images/1.jpg"),
                     ),
-                    Padding(
-                      padding: EdgeInsets.all(Get.width * 0.020), // 8
+                  ),
+                  Expanded(
+                    flex: 2,
+                    child: Padding(
+                      padding: EdgeInsets.only(top: Get.width * 0.020), // 8
                       child: Text(
                         "كلية الطب",
                         style: TextStyle(
@@ -46,8 +49,11 @@ class MyCardSlider extends StatelessWidget {
                         ),
                       ),
                     ),
-                    Padding(
-                      padding: EdgeInsets.all(Get.width * 0.020), // 8
+                  ),
+                  Expanded(
+                    flex: 2,
+                    child: Padding(
+                      padding: EdgeInsets.only(right: Get.width * 0.020), // 8
                       child: Align(
                         alignment: Alignment.topRight,
                         child: Text(
@@ -59,7 +65,10 @@ class MyCardSlider extends StatelessWidget {
                         ),
                       ),
                     ),
-                    Padding(
+                  ),
+                  Expanded(
+                    flex: 8,
+                    child: Padding(
                       padding: EdgeInsets.symmetric(horizontal: Get.width * 0.020), // 8
                       child: Text(
                         "Lorem ipsum dolor sit amet consectetur, adipisicing elit. In sequi velit sunt alias? Laudantium blanditiis quo provident quas, laboriosam reprehenderit, vero maxime delectus deleniti, velit inventore neque harum atque accusamus?",
@@ -70,8 +79,11 @@ class MyCardSlider extends StatelessWidget {
                         ),
                       ),
                     ),
-                    Padding(
-                      padding: EdgeInsets.all(Get.width * 0.025), // 10
+                  ),
+                  Expanded(
+                    flex: 4,
+                    child: Padding(
+                      padding: EdgeInsets.all(Get.width * 0.037), // 15
                       child: MyButton(
                         onPressed: () {},
                         width: Get.width * 0.365, // 150
@@ -85,8 +97,8 @@ class MyCardSlider extends StatelessWidget {
                         ),
                       ),
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
             ),
           ),

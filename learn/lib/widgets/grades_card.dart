@@ -1,15 +1,7 @@
 import 'package:advance_animated_progress_indicator/advance_animated_progress_indicator.dart';
-import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:just_bottom_sheet/drag_zone_position.dart';
-import 'package:just_bottom_sheet/just_bottom_sheet.dart';
-import 'package:just_bottom_sheet/just_bottom_sheet_configuration.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:learn/controller/theme_controller.dart';
-import 'package:learn/widgets/body_title.dart';
-import 'package:learn/widgets/color_swap.dart';
-import 'package:learn/widgets/lectuers_grades_tile.dart';
 
 class GradesCard extends StatelessWidget {
   const GradesCard({

@@ -6,6 +6,7 @@ import 'package:learn/screens/home/home.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:learn/views/my_footer.dart';
 import 'package:learn/widgets/body_title.dart';
+import 'package:learn/widgets/internet_status.dart';
 import 'package:learn/widgets/list_tile_card.dart';
 
 class CollagesMainPage extends StatelessWidget {
@@ -18,31 +19,49 @@ class CollagesMainPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView(
+    return Stack(
       children: [
-        FadeInDown(
-          delay: Duration(milliseconds: 300),
-          curve: Curves.fastOutSlowIn,
-          duration: Duration(milliseconds: 500),
-          child: BodyTitle(
-            title: appLocalizations.all(appLocalizations.colleges),
+        Padding(
+          padding: EdgeInsets.only(
+            top: Get.height * 0.11, // 95
+            bottom: 80,
+          ),
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                FadeInDown(
+                  delay: Duration(milliseconds: 300),
+                  curve: Curves.fastOutSlowIn,
+                  duration: Duration(milliseconds: 500),
+                  child: BodyTitle(
+                    title: appLocalizations.all(appLocalizations.colleges),
+                  ),
+                ),
+                ListTileCard(
+                  title: "كلية الطب",
+                  press: () => Get.toNamed("${Home.id}/${CollageMainPageDatiles.id}"),
+                ),
+                ListTileCard(
+                  title: "كلية الهندسة وتكنولوجيا المعلومات",
+                  press: () => Get.toNamed("${Home.id}/${CollageMainPageDatiles.id}"),
+                ),
+                ListTileCard(
+                  title: "كلية العلوم الادارية والانسانية",
+                  press: () => Get.toNamed("${Home.id}/${CollageMainPageDatiles.id}"),
+                ),
+                MyFooter(
+                  appLocalizations: appLocalizations,
+                ),
+              ],
+            ),
           ),
         ),
-        ListTileCard(
-          title: "كلية الطب",
-          press: () => Get.toNamed("${Home.id}/${CollageMainPageDatiles.id}"),
-        ),
-        ListTileCard(
-          title: "كلية الهندسة وتكنولوجيا المعلومات",
-          press: () => Get.toNamed("${Home.id}/${CollageMainPageDatiles.id}"),
-        ),
-        ListTileCard(
-          title: "كلية العلوم الادارية والانسانية",
-          press: () => Get.toNamed("${Home.id}/${CollageMainPageDatiles.id}"),
-        ),
-        MyFooter(
-          appLocalizations: appLocalizations,
-        ),
+        Positioned(
+          bottom: 80,
+          child: InternetStatus(
+            appLocalizations: appLocalizations,
+          ),
+        )
       ],
     );
     // return AnimatedCrossFade(

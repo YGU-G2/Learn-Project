@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:learn/controller/audios_player_controller.dart';
 import 'package:learn/controller/language_controller.dart';
-import 'package:learn/controller/login/login_controller.dart';
+import 'package:learn/controller/login_logout/login_controller.dart';
 import 'package:learn/controller/main_controller.dart';
 import 'package:learn/controller/table_controller.dart';
 import 'package:learn/controller/theme_controller.dart';
@@ -30,7 +31,7 @@ void main() async {
     selectedLanguage = Get.deviceLocale!.languageCode;
   }
 
-  LoginController.isLogined = await LoginController.getLogin();
+  LoginController.isLogined.value = await LoginController.getLogin();
 
   Get.updateLocale(Locale(selectedLanguage));
   Get.changeTheme(
@@ -87,6 +88,7 @@ class MyApp extends StatelessWidget {
         () {
           Get.put(TableController());
           Get.put(MainController());
+          Get.put(AudioPlayerController());
         },
       ),
     );

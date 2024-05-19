@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:icons_plus/icons_plus.dart';
-import 'package:learn/pages/dashboard/activities_settings.dart';
-import 'package:learn/pages/dashboard/collages_setting.dart';
-import 'package:learn/pages/dashboard/main_university_settings.dart';
-import 'package:learn/pages/dashboard/news_settings.dart';
+import 'package:learn/pages/dashboard/university/activities_settings.dart';
+import 'package:learn/pages/dashboard/university/collages_setting.dart';
+import 'package:learn/pages/dashboard/university/main_university_settings.dart';
+import 'package:learn/pages/dashboard/university/news_settings.dart';
 import 'package:learn/views/my_scaffold.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 

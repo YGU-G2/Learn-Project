@@ -8,6 +8,7 @@ class StudentsAffairs extends StatelessWidget {
 
   static String id = "/students_affairs";
 
+
   @override
   Widget build(BuildContext context) {
     final appLocalizations = AppLocalizations.of(context);

@@ -16,18 +16,22 @@ class MainUniversitySettings extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView(
-      children: [
-        FadeInDown(
-          delay: Duration(milliseconds: 500),
-          curve: Curves.fastOutSlowIn,
-          duration: Duration(milliseconds: 500),
-          child: BodyTitle(
-            title: appLocalizations.university,
-          ),
-        ),
-        Column(
+    return Padding(
+      padding: EdgeInsets.only(
+        top: 90,
+        bottom: 80,
+      ),
+      child: SingleChildScrollView(
+        child: Column(
           children: [
+            FadeInDown(
+              delay: Duration(milliseconds: 500),
+              curve: Curves.fastOutSlowIn,
+              duration: Duration(milliseconds: 500),
+              child: BodyTitle(
+                title: appLocalizations.university,
+              ),
+            ),
             FlipInY(
               delay: Duration(milliseconds: 700),
               curve: Curves.fastOutSlowIn,
@@ -80,7 +84,8 @@ class MainUniversitySettings extends StatelessWidget {
               name: "",
               delay: 1100,
               fillColor: Theme.of(context).primaryColorDark,
-              title: appLocalizations.universityName(appLocalizations.arabic),
+              title:
+                  appLocalizations.universityName(appLocalizations.arabic),
               isRequired: true,
               keyboardType: TextInputType.name,
               label: Text(
@@ -100,7 +105,8 @@ class MainUniversitySettings extends StatelessWidget {
               name: "",
               delay: 1300,
               fillColor: Theme.of(context).primaryColorDark,
-              title: appLocalizations.universityName(appLocalizations.english),
+              title:
+                  appLocalizations.universityName(appLocalizations.english),
               isRequired: true,
               keyboardType: TextInputType.name,
               label: Text(
@@ -165,7 +171,7 @@ class MainUniversitySettings extends StatelessWidget {
             ),
           ],
         ),
-      ],
+      ),
     );
   }
 }
