@@ -16,8 +16,8 @@ class MyBottomSheet {
             decoration: BoxDecoration(
               color: Get.theme.primaryColorDark,
               borderRadius: BorderRadius.only(
-                topRight: Radius.circular(10),
-                topLeft: Radius.circular(10),
+                topRight: Radius.circular(15),
+                topLeft: Radius.circular(15),
               ),
             ),
             child: Center(

@@ -118,7 +118,8 @@ class _UserInfoTapState extends State<UserInfoTap> {
                           Widget child,
                         ) {
                           CheckInternetConnection.checkTheInternet();
-                          if (CheckInternetConnection.isInternetOnLine.value) {
+                          if (CheckInternetConnection.isInternetOnLine.value &&
+                              widget.imagePath.isNotEmpty) {
                             return Padding(
                               padding: const EdgeInsets.all(8.0),
                               child: CircleAvatar(
