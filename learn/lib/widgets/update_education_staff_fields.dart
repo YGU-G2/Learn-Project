@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:get/get.dart';
+import 'package:learn/controller/academic_affairs/education_staff_controller.dart';
 import 'package:learn/controller/language_controller.dart';
+import 'package:learn/controller/login_logout/login_controller.dart';
 import 'package:learn/utils/format_founctions.dart';
 import 'package:learn/utils/my_alert.dart';
 import 'package:learn/widgets/form/my_date_form_field.dart';
@@ -222,7 +224,7 @@ class _UpdateEducationStaffFieldsState
                     title: widget.title ?? '',
                     keyboardType: widget.fieldsType == UpdateFieldsType.email
                         ? TextInputType.emailAddress
-                        : TextInputType.text,
+                        : TextInputType.multiline,
                     isRequired: false,
                     label: Text(
                       widget.appLocalizations!.enter(
@@ -252,8 +254,10 @@ class _UpdateEducationStaffFieldsState
                     onChanged: (value) {
                       filedFormKey.currentState!.saveAndValidate();
                       setState(() {
-                        isFieldChenged =
-                            value != widget.snapshot.data![widget.fieldName];
+                        isFieldChenged = value !=
+                            FormatFounctions.getDateFromString(
+                              string: widget.snapshot.data![widget.fieldName],
+                            );
                       });
                     },
                     initialValue: FormatFounctions.getDateFromString(
@@ -284,30 +288,59 @@ class _UpdateEducationStaffFieldsState
                         ? TextButton(
                             onPressed: () {
                               if (widget.fieldsType ==
-                                      UpdateFieldsType.password &&
-                                  filedFormKey.currentState!
-                                          .value[widget.fieldName] ==
-                                      widget.snapshot.data![widget.fieldName]) {
-                                setState(() {
-                                  isPassInNextStep = true;
-                                  isFieldChenged = false;
+                                  UpdateFieldsType.password) {
+                                if (filedFormKey.currentState!
+                                        .value[widget.fieldName] ==
+                                    widget.snapshot.data![widget.fieldName]) {
+                                  if (isPassInNextStep) {
+                                    EducationStaffController
+                                        .updateEducationStaff(
+                                            LoginController.educationStaffId, {
+                                      widget.fieldName: filedFormKey
+                                          .currentState!
+                                          .value['${widget.fieldName}new']
+                                    });
+                                    Get.back();
+                                  }
+                                  setState(() {
+                                    isPassInNextStep = true;
+                                    isFieldChenged = false;
+                                  });
+                                } else {
+                                  MyAlert.snackbar(
+                                    title: LanguageController
+                                                .getCurrentLanguage() ==
+                                            "ar"
+                                        ? "كلمة السر غير صحيحة"
+                                        : "Incorrect Password",
+                                    message: LanguageController
+                                                .getCurrentLanguage() ==
+                                            "ar"
+                                        ? "كلمة السر غير صحيحة، حاول مره اخرى"
+                                        : "The Password Is Incorrect, Try Again",
+                                    backgroundColor:
+                                        Color.fromARGB(70, 239, 83, 80),
+                                    colorText: Get.theme.primaryColorLight,
+                                  );
+                                }
+                              } else if (widget.fieldsType ==
+                                  UpdateFieldsType.date) {
+                                EducationStaffController.updateEducationStaff(
+                                    LoginController.educationStaffId, {
+                                  widget.fieldName:
+                                      FormatFounctions.getStringFromDate(
+                                    date: filedFormKey
+                                        .currentState!.value[widget.fieldName],
+                                  )
                                 });
+                                Get.back();
                               } else {
-                                MyAlert.snackbar(
-                                  title:
-                                      LanguageController.getCurrentLanguage() ==
-                                              "ar"
-                                          ? "كلمة السر غير صحيحة"
-                                          : "Incorrect Password",
-                                  message: LanguageController
-                                              .getCurrentLanguage() ==
-                                          "ar"
-                                      ? "كلمة السر غير صحيحة، حاول مره اخرى"
-                                      : "The Password Is Incorrect, Try Again",
-                                  backgroundColor:
-                                      Color.fromARGB(70, 239, 83, 80),
-                                  colorText: Get.theme.primaryColorLight,
-                                );
+                                EducationStaffController.updateEducationStaff(
+                                    LoginController.educationStaffId, {
+                                  widget.fieldName: filedFormKey
+                                      .currentState!.value[widget.fieldName]
+                                });
+                                Get.back();
                               }
                             },
                             child: Text(

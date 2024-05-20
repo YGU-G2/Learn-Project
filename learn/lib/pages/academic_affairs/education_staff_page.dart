@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'dart:math';
 
 import 'package:animate_do/animate_do.dart';
@@ -5,15 +6,21 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
+import 'package:flutter_offline/flutter_offline.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:get/get.dart';
+import 'package:icons_plus/icons_plus.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:learn/controller/academic_affairs/education_staff_controller.dart';
 import 'package:learn/controller/academic_affairs/permisions_controller.dart';
 import 'package:learn/controller/language_controller.dart';
+import 'package:learn/controller/login_logout/login_controller.dart';
 import 'package:learn/controller/table_controller.dart';
 import 'package:learn/models/education_staff.dart';
 import 'package:learn/models/permisions.dart';
+import 'package:learn/utils/check_internet_connection.dart';
 import 'package:learn/utils/my_alert_dialog.dart';
+import 'package:learn/utils/my_bottom_sheet.dart';
 import 'package:learn/views/my_table/my_data_cell.dart';
 import 'package:learn/views/my_table/my_data_column.dart';
 import 'package:learn/views/my_table/my_table.dart';
@@ -27,6 +34,8 @@ import 'package:learn/widgets/loading.dart';
 import 'package:learn/utils/my_alert.dart';
 import 'package:learn/widgets/my_button.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:learn/widgets/show_info_list_tile.dart';
+import 'package:learn/widgets/update_education_staff_fields.dart';
 
 class EducationStaffPage extends StatelessWidget {
   const EducationStaffPage({
@@ -42,8 +51,9 @@ class EducationStaffPage extends StatelessWidget {
     final permisionsFormKey = GlobalKey<FormBuilderState>();
     final searchFormKey = GlobalKey<FormBuilderState>();
     final TableController tableController = Get.find<TableController>();
+    final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
-    void _handleAddEducationStaff() async {
+    void handleAddEducationStaff() async {
       if (educationStaffFormKey.currentState!.saveAndValidate()) {
         Permisions permisions = await PermisionsController.getPermisionById(
           educationStaffFormKey.currentState!.value['educationStaffPermisions'],
@@ -78,7 +88,7 @@ class EducationStaffPage extends StatelessWidget {
       }
     }
 
-    void _handleAddPermisions() async {
+    void handleAddPermisions() async {
       if (permisionsFormKey.currentState!.saveAndValidate()) {
         await PermisionsController.addPermisions(
           Permisions(
@@ -127,7 +137,7 @@ class EducationStaffPage extends StatelessWidget {
       }
     }
 
-    void _handleEditEducationStaff(EducationStaff editEducationStaff) async {
+    void handleEditEducationStaff(EducationStaff editEducationStaff) async {
       if (educationStaffFormKey.currentState!.saveAndValidate()) {
         Permisions permisions = await PermisionsController.getPermisionById(
           educationStaffFormKey.currentState!.value['educationStaffPermisions'],
@@ -164,7 +174,7 @@ class EducationStaffPage extends StatelessWidget {
       }
     }
 
-    void _handleEditPermisions(Permisions permisions) async {
+    void handleEditPermisions(Permisions permisions) async {
       if (permisionsFormKey.currentState!.saveAndValidate()) {
         await PermisionsController.editPermisions(
           Permisions(
@@ -213,7 +223,7 @@ class EducationStaffPage extends StatelessWidget {
       }
     }
 
-    void _handleDeleteEducationStaff(
+    void handleDeleteEducationStaff(
         QueryDocumentSnapshot<Map<String, dynamic>> document) {
       MyAlertDialog.showMyAlertDialog(
         appLocalizations: appLocalizations!,
@@ -231,7 +241,7 @@ class EducationStaffPage extends StatelessWidget {
       );
     }
 
-    void _handleDeletePermision(
+    void handleDeletePermision(
         QueryDocumentSnapshot<Map<String, dynamic>> document) {
       MyAlertDialog.showMyAlertDialog(
         appLocalizations: appLocalizations!,
@@ -831,9 +841,9 @@ class EducationStaffPage extends StatelessWidget {
                                       : false,
                                   onPressed: () {
                                     if (isAdd) {
-                                      _handleAddPermisions();
+                                      handleAddPermisions();
                                     } else {
-                                      _handleEditPermisions(
+                                      handleEditPermisions(
                                         permisions!,
                                       );
                                     }
@@ -900,6 +910,222 @@ class EducationStaffPage extends StatelessWidget {
             ),
           );
         },
+      );
+    }
+
+    void showEduactionStaff({required String educationStaffId}) {
+      MyBottomSheet.getBottomSheet(
+        content: Container(
+          color: Theme.of(context).primaryColorDark,
+          height: Get.height / 1.3,
+          child: SingleChildScrollView(
+            child: StreamBuilder(
+                stream: _firestore
+                    .collection('education_staff')
+                    .doc(educationStaffId)
+                    .snapshots(),
+                builder: (context, snapshot) {
+                  if (snapshot.data == null) {
+                    return SizedBox(
+                      width: Get.width,
+                      height: Get.height - 90,
+                      child: Center(
+                        child: Loading.getCubeGrid(
+                          size: Get.width * 0.0975,
+                          color: Theme.of(context).colorScheme.primary,
+                        ),
+                      ),
+                    );
+                  }
+                  if (snapshot.hasError) {
+                    return MyAlert.snackbar(
+                      title: LanguageController.getCurrentLanguage() == "ar"
+                          ? "خطاء"
+                          : "Error",
+                      message: LanguageController.getCurrentLanguage() == "ar"
+                          ? "خطاء في تحميل البيانات"
+                          : "Error In Loading Data",
+                      backgroundColor: Color.fromARGB(70, 239, 83, 80),
+                      colorText: Get.theme.primaryColorLight,
+                    );
+                  }
+                  return Column(
+                    children: [
+                      FlipInY(
+                        delay: const Duration(milliseconds: 700),
+                        curve: Curves.fastOutSlowIn,
+                        duration: const Duration(milliseconds: 500),
+                        child: Text(
+                          appLocalizations!.profileImage,
+                          style: TextStyle(
+                            fontSize: Get.width * 0.04, // 16
+                            fontWeight: FontWeight.bold,
+                            color: Theme.of(context).primaryColorLight,
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      ZoomIn(
+                        delay: Duration(milliseconds: 900),
+                        curve: Curves.fastOutSlowIn,
+                        duration: Duration(milliseconds: 500),
+                        child: OfflineBuilder(
+                          connectivityBuilder: (
+                            BuildContext context,
+                            ConnectivityResult connectivity,
+                            Widget child,
+                          ) {
+                            CheckInternetConnection.checkTheInternet();
+                            if (CheckInternetConnection
+                                    .isInternetOnLine.value &&
+                                snapshot.data!['educationStaffImage']
+                                    .isNotEmpty) {
+                              return CircleAvatar(
+                                radius: Get.width * 0.220, // 90
+                                backgroundImage: NetworkImage(
+                                  "${snapshot.data!['educationStaffImage']}",
+                                ),
+                                onBackgroundImageError:
+                                    (exception, stackTrace) => Icon(
+                                  CupertinoIcons.person,
+                                  color: Theme.of(context)
+                                      .colorScheme
+                                      .onSurface,
+                                  size: Get.width * 0.220, // 90
+                                ),
+                                backgroundColor:
+                                    Theme.of(context).colorScheme.primary,
+                              );
+                            } else {
+                              return CircleAvatar(
+                                radius: Get.width * 0.220, // 90
+                                backgroundColor:
+                                    Theme.of(context).colorScheme.primary,
+                                child: Icon(
+                                  CupertinoIcons.person,
+                                  color: Theme.of(context)
+                                      .colorScheme
+                                      .onSurface,
+                                  size: Get.width * 0.220, // 90
+                                ),
+                              );
+                            }
+                          },
+                          child: Loading.getCubeGrid(
+                            size: Get.width * 0.062, //25
+                          ),
+                        ),
+                        ),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      ShowInfoListTile(
+                        appLocalizations: appLocalizations!,
+                        title: appLocalizations!.name,
+                        text: "${snapshot.data!['educationStaffName']}",
+                        icon: Icons.person_rounded,
+                        showEditBtn: false,
+                        delay: 1100,
+                      ),
+                      ShowInfoListTile(
+                        appLocalizations: appLocalizations!,
+                        title: appLocalizations!.academicNumber,
+                        text:
+                            "${snapshot.data!['educationStaffAcademicNumber']}",
+                        icon: Icons.person_rounded,
+                        showEditBtn: false,
+                        delay: 1150,
+                      ),
+                      ShowInfoListTile(
+                        appLocalizations: appLocalizations!,
+                        title: appLocalizations!.academicDegree,
+                        text: EducationStaffController
+                            .getEducationStaffAcademicDegree(
+                          educationStaffAcademicDegree:
+                              "${snapshot.data!['educationStaffAcademicDegree']}",
+                          appLocalizations: appLocalizations!,
+                        ),
+                        icon: Icons.school_rounded,
+                        showEditBtn: false,
+                        delay: 1200,
+                      ),
+                      ShowInfoListTile(
+                        appLocalizations: appLocalizations!,
+                        title: appLocalizations!.gender,
+                        text: EducationStaffController.getEducationStaffGender(
+                          educationStaffGender:
+                              "${snapshot.data!['educationStaffGender']}",
+                          appLocalizations: appLocalizations!,
+                        ),
+                        icon: Icons.group_outlined,
+                        showEditBtn: false,
+                        delay: 1250,
+                      ),
+                      ShowInfoListTile(
+                        appLocalizations: appLocalizations!,
+                        title: appLocalizations!.birthDate,
+                        text: snapshot.data!['educationStaffBirthDate'],
+                        icon: Icons.date_range_rounded,
+                        delay: 1300,
+                        showEditBtn: false,
+                      ),
+                      ShowInfoListTile(
+                        appLocalizations: appLocalizations!,
+                        title: appLocalizations!.jobTitle,
+                        text:
+                            EducationStaffController.getEducationStaffJobTitle(
+                          educationStaffJobTitle:
+                              "${snapshot.data!['educationStaffJobTitle']}",
+                          appLocalizations: appLocalizations!,
+                        ),
+                        icon: Icons.work_rounded,
+                        showEditBtn: false,
+                        delay: 1350,
+                      ),
+                      ShowInfoListTile(
+                        appLocalizations: appLocalizations!,
+                        title: appLocalizations!.email,
+                        text: "${snapshot.data!['educationStaffEmail']}",
+                        icon: Icons.email_rounded,
+                        delay: 1400,
+                        showEditBtn: false,
+                      ),
+                      ShowInfoListTile(
+                        appLocalizations: appLocalizations!,
+                        title: appLocalizations!.aboutYou,
+                        text: "${snapshot.data!['educationStaffAbout']}",
+                        icon: Icons.person_pin_rounded,
+                        delay: 1450,
+                        showEditBtn: false,
+                      ),
+                      ShowInfoListTile(
+                        appLocalizations: appLocalizations!,
+                        title: appLocalizations!.communication,
+                        child: Row(
+                          children: List.generate(
+                            snapshot.data!['educationStaffSocialMedia'] == null
+                                ? 0
+                                : snapshot
+                                    .data!['educationStaffSocialMedia'].length,
+                            (index) => TextButton(
+                              onPressed: () {},
+                              child: Brand(
+                                Brands.facebook,
+                              ),
+                            ),
+                          ),
+                        ),
+                        icon: Icons.contacts_rounded,
+                        showEditBtn: false,
+                        delay: 1450,
+                      ),
+                    ],
+                  );
+                }),
+          ),
+        ),
       );
     }
 
@@ -1525,7 +1751,7 @@ class EducationStaffPage extends StatelessWidget {
                                                                   return;
                                                                 }
                                                                 Get.back();
-                                                                _handleDeletePermision(
+                                                                handleDeletePermision(
                                                                   document,
                                                                 );
                                                               },
@@ -1623,9 +1849,9 @@ class EducationStaffPage extends StatelessWidget {
                                     : false,
                                 onPressed: () {
                                   if (isAdd) {
-                                    _handleAddEducationStaff();
+                                    handleAddEducationStaff();
                                   } else {
-                                    _handleEditEducationStaff(
+                                    handleEditEducationStaff(
                                       educationStaff!,
                                     );
                                   }
@@ -1815,7 +2041,8 @@ class EducationStaffPage extends StatelessWidget {
                       MyAlertDialog.showMyAlertDialog(
                         appLocalizations: appLocalizations!,
                         icon: Icons.warning_amber_rounded,
-                        whoDelete: "${tableController.getSelectedCount(1)} ${appLocalizations!.ofRows}",
+                        whoDelete:
+                            "${tableController.getSelectedCount(1)} ${appLocalizations!.ofRows}",
                         iconColor: Colors.red,
                         title: appLocalizations!.warningMessage,
                         onYesBtnPressed: () {
@@ -1909,6 +2136,11 @@ class EducationStaffPage extends StatelessWidget {
                     },
                     {
                       ColumnData.width: 70.toDouble(),
+                      ColumnData.text: appLocalizations!.display(''),
+                      ColumnData.canSort: false,
+                    },
+                    {
+                      ColumnData.width: 70.toDouble(),
                       ColumnData.text: appLocalizations!.edit,
                       ColumnData.canSort: false,
                     },
@@ -1995,7 +2227,51 @@ class EducationStaffPage extends StatelessWidget {
                                   ],
                                 ),
                               ),
-                              document.id: MyDataCell(
+                              "show": MyDataCell(
+                                width: 70,
+                                alignment: Alignment.center,
+                                child: Obx(
+                                  () => MyButton(
+                                    isEnable: !EducationStaffController
+                                        .isEducationStaffOperationWaiting.value,
+                                    onPressed: () {
+                                      EducationStaffController
+                                          .isEducationStaffOperationType
+                                          .value = "show";
+                                      EducationStaffController
+                                          .isEducationStaffOperationId
+                                          .value = document.id;
+                                      showEduactionStaff(
+                                          educationStaffId: document.id);
+                                    },
+                                    elevation: 5,
+                                    width: Get.width * 0.122,
+                                    backgroundColor: Colors.green,
+                                    child: EducationStaffController
+                                                .isEducationStaffOperationWaiting
+                                                .value &&
+                                            EducationStaffController
+                                                    .isEducationStaffOperationType
+                                                    .value ==
+                                                "show" &&
+                                            EducationStaffController
+                                                    .isEducationStaffOperationId
+                                                    .value ==
+                                                document.id
+                                        ? Loading.getCubeGrid(
+                                            color: Theme.of(context)
+                                                .colorScheme
+                                                .surfaceTint,
+                                          )
+                                        : Icon(
+                                            Icons.remove_red_eye_rounded,
+                                            color:
+                                                Get.theme.colorScheme.onSurface,
+                                          ),
+                                  ),
+                                ),
+                              ),
+                              "edit": MyDataCell(
                                 width: 70,
                                 alignment: Alignment.center,
                                 child: Obx(
@@ -2040,7 +2316,7 @@ class EducationStaffPage extends StatelessWidget {
                                   ),
                                 ),
                               ),
-                              "${document.id};": MyDataCell(
+                              "delete": MyDataCell(
                                 width: 70,
                                 textColor: Get.theme.colorScheme.onSurface,
                                 alignment: Alignment.center,
@@ -2060,7 +2336,7 @@ class EducationStaffPage extends StatelessWidget {
                                       EducationStaffController
                                           .isEducationStaffOperationId
                                           .value = document.id;
-                                      _handleDeleteEducationStaff(document);
+                                      handleDeleteEducationStaff(document);
                                     },
                                     child: EducationStaffController
                                                 .isEducationStaffOperationWaiting

@@ -14,7 +14,7 @@ class EducationStaff {
   final String? educationStaffEmail;
   final String? educationStaffAbout;
   final bool isEducationStaffLogined;
-  final Map<String, String>? educationStaffSocialMedia;
+  final Map<String, dynamic>? educationStaffSocialMedia;
 
   EducationStaff({
     required this.educationStaffId,
